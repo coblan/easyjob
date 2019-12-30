@@ -13,8 +13,8 @@ from helpers.mobile.base_data import mb_page_dc
 
 class PcMenu(BaseEngine):
     url_name = 'Job'
-    title = 'x' #'四川鑫昌隆管理后台'
-    brand = 'x' #'四川鑫昌隆'
+    title = 'x' #''
+    brand = 'x' #''
     mini_brand = 'XCL'
     menu_search=False
     need_staff=True
@@ -33,14 +33,14 @@ class PcMenu(BaseEngine):
                
              ]},
    
-            #{'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
-             #'submenu': [
+            {'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
+             'submenu': [
                  #{'label': '微信用户', 'url': page('wxuserinfo'), 'visible': can_touch(Group, crt_user)},
-                 #{'label': '账号管理', 'url': page('jb_user'), 'visible': can_touch(User, crt_user)},
+                 {'label': '账号管理', 'url': page('jb_user'), 'visible': can_touch(User, crt_user)},
                  #{'label': '权限分组', 'url': page('jb_group'), 'visible': can_touch(Group, crt_user)},
                   
                  
-             #]},
+             ]},
 
         ]
 
