@@ -13,9 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
+from hello.engin_menu import MBpageEngine,PcMenu
+from django.views.generic import RedirectView 
+from helpers.authuser.engin_view import AuthEngine
+from helpers.director.views import director_view
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    #url(r'^admin/', admin.site.urls),
+    url(r'^accounts/([\w\.]+)/?$',AuthEngine.as_view(),name=AuthEngine.url_name),
+    url(r'^pc/([\w\.]+)/?$',PcMenu.as_view(),name=PcMenu.url_name),
+    url(r'^d/',include('helpers.director.urls'),name='director'),
+    url(r'^mb/([\w\.]+)/?$',MBpageEngine.as_view(),name=MBpageEngine.url_name),
+     url(r'^dapi/(?P<director_name>[\w\/\.-]+)?/?$',director_view),
+    url(r'^$',RedirectView.as_view(url='/pc/jobinfo')) ,
 ]
