@@ -30,6 +30,7 @@ class JobinfoUserForm(ModelFieldsMobile):
 class JobinfUserList(ModelTableMobile):
     model = JobInfo
     exclude = []
+    nolimit=True
     
     class filters(RowFilter):
         names =['position']
