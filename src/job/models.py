@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+INFO_STATUS=(
+    (1,'在线'),
+    (2,'离线'),
+)
+
 class JobInfo(models.Model):
     #title = models.CharField('标题',max_length=100)
     position = models.CharField('职位',max_length=100)
@@ -12,4 +17,4 @@ class JobInfo(models.Model):
     update_time = models.DateTimeField('更新时间',auto_now_add=True)
     detail = models.TextField('详细介绍',blank=True)
     publisher = models.ForeignKey(User,)
-    
+    status = models.IntegerField('状态',choices=INFO_STATUS,default=1)

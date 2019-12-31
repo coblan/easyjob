@@ -95,6 +95,10 @@
         font-size: .3rem;
         font-weight: 500;
         margin-bottom: .2rem;
+        white-space: nowrap;
+        max-width: 5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .pay{
         color: grey;
