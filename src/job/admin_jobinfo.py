@@ -28,17 +28,19 @@ class JobinfoUserForm(ModelFieldsMobile):
         self.instance.publisher = self.crt_user
 
 class JobinfUserList(ModelTableMobile):
+    "招工信息"
     model = JobInfo
     exclude = []
     nolimit=True
     def inn_filter(self, query):
-        return query.order_by('-update_time')
+        return query.filter(status=1).order_by('-update_time')
     
     class filters(RowFilter):
         names =['position','com_name']
         icontains = ['position','com_name']
 
 class MyJobinfoList(ModelTableMobile):
+    "我的发布"
     model = JobInfo
     exclude = []
     nolimit=True
@@ -64,7 +66,7 @@ class MyJobinfoList(ModelTableMobile):
         return { '_director_name':'jobinfoform'}
     
     def inn_filter(self, query):
-        return query.order_by('-update_time')
+        return query.filter(publisher=self.crt_user).order_by('-update_time')
     
     
 
