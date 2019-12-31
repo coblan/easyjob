@@ -40,7 +40,7 @@
     /*background: -ms-linear-gradient(45deg, rgb(108, 172, 244) 44%, rgb(174, 196, 250) 63%);*/
     /*background: linear-gradient(135deg, rgb(108, 172, 244) 44%, rgb(174, 196, 250) 63%);*/
 
-    background-image: url("/static/images/job_offer_0.webp");
+    background-image: url("/static/images/ezgif.com-webp-to-jpg.jpg");
     background-size: cover;
     background-repeat:no-repeat;
 }
