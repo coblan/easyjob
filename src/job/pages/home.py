@@ -35,9 +35,14 @@ class Home(object):
                     {'editor':'com-van-grid',
                      'title':'商家',
                      'heads':[
-                         {'label':'发布招工','icon':'/static/images/求职.png','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+                         {
+                             'label':'商家认证',
+                             'icon':'/static/images/认证.png',
+                             'action':'cfg.toast("功能暂未开放")',
+                         },
+                         {'label':'发布招工','icon':'/static/images/发布.png','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
                           'fields_ctx':{ 'title':'发布招工','after_save':'cfg.toast("发布成功!");setTimeout(()=>{history.back()},1500)',**JobinfoUserForm().get_context() } },
-                         {'label':'求职信息','icon':'/static/images/工厂招工.png',
+                         {'label':'求职信息','icon':'/static/images/求职.png',
                           'action':'cfg.toast("求职模块暂时未开通!")',
                           #'action':'live_root.open_live("live_list",scope.head.table_ctx)',
                           #'table_ctx':JobinfUserList().get_head_context(),
@@ -55,17 +60,14 @@ class Home(object):
                                        **MyJobinfoList().get_head_context()}, 
                            'action':'live_root.open_live("live_list",scope.head.table_ctx)',
                            },
-                         {
-                             'label':'商家认证',
-                             'icon':'/static/images/认证.png',
-                             'action':'cfg.toast("暂未完成")',
-                         }
+                         
                          ]},
                     {'editor':'com-van-grid',
                      'title':'个人',
                      'heads':[
+                         {'label':'个人简历','icon':'/static/images/个人简历.png','action':'cfg.toast("模块尚未开通，敬请期待!")'},
                          {'label':'发布求职','icon':'/static/images/发布招工.png','action':'cfg.toast("个人求职模块暂时未开通!")'},
-                         {'label':'招工信息','icon':'/static/images/招工信息.png',
+                         {'label':'招工信息','icon':'/static/images/工厂招工.png',
                           'action':'live_root.open_live("live_list",scope.head.table_ctx)',
                           'table_ctx':{'title':'需求职位',
                                        'table_editor':'com-list-jobinfo-item',
