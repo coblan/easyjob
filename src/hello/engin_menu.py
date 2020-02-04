@@ -27,6 +27,7 @@ class PcMenu(BaseEngine):
          
             {'label': '公司', 'icon': fa('fa-truck'), 'visible': True,
              'submenu': [
+                {'label':'公司信息','url':page('cominfo')},
                 #{'label':'商品', 'url': page('goods'), },
                 {'label':'招工信息', 'url': page('jobinfo'), },
        

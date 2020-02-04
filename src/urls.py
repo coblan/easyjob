@@ -19,6 +19,8 @@ from hello.engin_menu import MBpageEngine,PcMenu
 from django.views.generic import RedirectView 
 from helpers.authuser.engin_view import AuthEngine
 from helpers.director.views import director_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
@@ -30,3 +32,6 @@ urlpatterns = [
     url(r'^pc/?$',RedirectView.as_view(url='/pc/jobinfo')) ,
     url(r'^$',RedirectView.as_view(url='/mb/index')) ,
 ]
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

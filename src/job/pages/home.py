@@ -38,9 +38,11 @@ class Home(object):
                          {
                              'label':'商家认证',
                              'icon':'/static/images/认证.png',
-                             'action':'cfg.toast("功能暂未开放")',
+                             'action':'location = "/mb/com_cert"',
+      
                          },
-                         {'label':'发布招工','icon':'/static/images/发布.png','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+                         {'label':'发布招工','icon':'/static/images/发布.png',
+                          'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
                           'fields_ctx':{ 'title':'发布招工','after_save':'cfg.toast("发布成功!");setTimeout(()=>{history.back()},1500)',**JobinfoUserForm().get_context() } },
                          {'label':'求职信息','icon':'/static/images/求职.png',
                           'action':'cfg.toast("求职模块暂时未开通!")',
