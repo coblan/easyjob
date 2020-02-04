@@ -30,11 +30,6 @@ class CompanyInfoForm(ModelFields):
     class Meta:
         model = CompanyInfo
         exclude =[]
-    
-    def dict_head(self, head):
-        if head['name'] == 'license':
-            head['readonly'] = True
-        return head
 
 
 class CompanyInfoBasic(ModelFieldsMobile):
