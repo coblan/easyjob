@@ -37,3 +37,6 @@ class CompanyInfo(models.Model):
     update_time = models.DateTimeField(verbose_name='更新时间',auto_now=True)
     status = models.IntegerField(verbose_name='当前状态',choices=COM_INFO_STATUS,default=0)
     
+    def __str__(self):
+        return self.name
+    

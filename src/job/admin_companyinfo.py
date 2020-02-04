@@ -1,4 +1,4 @@
-from helpers.director.shortcut import TablePage,ModelTable,ModelFields,director,page_dc,get_request_cache,director_view
+from helpers.director.shortcut import TablePage,ModelTable,ModelFields,director,page_dc,get_request_cache,director_view,RowFilter
 from helpers.director.model_func.dictfy import sim_dict
 from .models import CompanyInfo
 from helpers.mobile.shortcut import ModelFieldsMobile
@@ -13,11 +13,28 @@ class CompanyInfoPage(TablePage):
     class tableCls(ModelTable):
         model = CompanyInfo
         exclude =[]
-    
+        pop_edit_fields=['id']
+        
+        class filters(RowFilter):
+            names = ['status']
+        
+        #def get_operation(self):
+            #ops = super().get_operation()
+            #ops += [
+                #{'editor':'com-op-btn','label':'通过审核',}
+            #]
+            #return ops
+        
 class CompanyInfoForm(ModelFields):
+    readonly = ['user']
     class Meta:
         model = CompanyInfo
         exclude =[]
+    
+    def dict_head(self, head):
+        if head['name'] == 'license':
+            head['readonly'] = True
+        return head
 
 
 class CompanyInfoBasic(ModelFieldsMobile):
