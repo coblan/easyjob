@@ -27,7 +27,7 @@ COM_INFO_STATUS=(
     (2,'审批通过'),
 )
 class CompanyInfo(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User,verbose_name = '账号')
     name = models.CharField('公司名称',max_length=200)
     contact = models.CharField('联系方式',max_length=200,)
     address = models.CharField('地址',max_length=400,blank=True)
