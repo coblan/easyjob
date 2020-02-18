@@ -14,3 +14,6 @@ from . import admin_jobinfo
 from . import admin_companyinfo
 from . import admin_workinfo
 from . import admin_seekjob
+
+
+from . import db_signal

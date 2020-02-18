@@ -2,7 +2,7 @@ from hello.engin_menu import mb_page
 from django.conf import settings
 from helpers.director.shortcut import get_request_cache
 from job.admin_jobinfo import JobinfoUserForm,JobinfUserList,MyJobinfoList
-from job.admin_seekjob import SeekjobUserList,SeekJobUserForm,Seekjob_Company
+from job.admin_seekjob import SeekjobUserList,Seekjob_Company
 
 class Home(object):
     def __init__(self, request, engin):
