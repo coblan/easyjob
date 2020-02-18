@@ -52,7 +52,7 @@ class SeekJobUserForm(ModelFieldsMobile):
                 'label':'保存并提交审核',
                 'show':'scope.vc.row.audit_status ==1',
                 'action':'''if(scope.ps.vc.isValid()){
-                    cfg.confirm("审核期间该条记录将不能被修改，确定提交审核吗?").then(()=>{ scope.ps.vc.row.audit_status=1; scope.ps.vc.submit() })
+                    cfg.confirm("审核期间该条记录将不能被修改，确定提交审核吗?").then(()=>{ scope.ps.vc.row.audit_status=2; scope.ps.vc.submit() })
                     } '''
                 })
         ops += [
