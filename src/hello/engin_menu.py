@@ -30,9 +30,13 @@ class PcMenu(BaseEngine):
                 {'label':'公司信息','url':page('cominfo')},
                 #{'label':'商品', 'url': page('goods'), },
                 {'label':'招工信息', 'url': page('jobinfo'), },
-       
-               
              ]},
+            {'label':'求职者','icon':fa('fa-truck'),
+             'submenu':[
+                 {'label':'人员信息','url':page('workinfo')},
+                 {'label':'求职信息','url':page('seekjob')}
+             ]
+             },
    
             {'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
              'submenu': [
@@ -80,6 +84,10 @@ class MBpageEngine(BaseEngine):
             ctx['extra_js'] = []
         if 'job' not in ctx['extra_js']:
             ctx['extra_js'].append('job')
+        ctx['extra_js'].append('moment')
+        ctx['extra_js'].append('moment_zh_cn')
+        
+        
         #ctx['extra_js'].append('moment')
         return ctx
 

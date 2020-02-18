@@ -17,7 +17,7 @@ class Comcert(object):
                         'title':'商家认证',
                         'back_action':'location="/mb/index"',
                         'groups':[
-                           {'label':'基本信息',
+                           {'label':'认证信息',
                              'cells':[
                                  {'label':'公司基本信息',
                                   'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
@@ -25,11 +25,7 @@ class Comcert(object):
                                       'title':'基本信息',
                                       **CompanyInfoBasic().get_context()
                                       }},
-                              ]
-                             },
-                            {'label':'资料上传',
-                             'cells':[
-                                 {'label':'营业执照','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+                                {'label':'营业执照','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
                                   'fields_ctx':{
                                       'title':'营业执照',
                                       **CompanyInfoLicense().get_context()}},
@@ -43,9 +39,10 @@ class Comcert(object):
                                       'title':'资质证书',
                                       **CompanyInfo_qualification_certificate().get_context()
                                       }},
+                                 
                               ]
                              },
-                            {'label':'审核操作',
+                            {'label':'其他',
                              'cells':[
                                  {'label':'审核进度',
                                   'action':'live_root.open_live("live_com_cert_progress",scope.head.progress_ctx)',
