@@ -5,7 +5,7 @@
             <div class="title-panel">
                 <div class="head-panel">
                     <div class="head">
-                        <img  :src="ctx.row.worker__head" alt="">
+                        <img  :src="ctx.row.worker__head || '/static/images/头像.png'" alt="">
                     </div>
                     <div class="name" v-text="ctx.row.worker__name"></div>
                 </div>
