@@ -20,13 +20,43 @@ class JobinfoForm(ModelFields):
         
 class JobinfoUserForm(ModelFieldsMobile):
     nolimit=True
-    readonly=['audit_status']
     class Meta:
         model = JobInfo
         exclude =['com']
     
     def clean_save(self):
         self.instance.com = self.crt_user.companyinfo
+    
+    def dict_head(self, head):
+        head = super().dict_head(head)
+        if head['name'] not in ['audit_status','status']:
+            head['readonly'] = 'scope.row.audit_status !=1'
+        if head['name'] == 'audit_status':
+            head ['readonly'] = True
+        return head
+    
+    def get_operations(self):
+        ops = super().get_operations()
+        for op in ops:
+            if op['name'] == 'save':
+                op.update({
+                    'label':'保存并提交审核',
+                    'show':'scope.vc.row.audit_status ==1',
+                    'action':'''if(scope.ps.vc.isValid()){
+                        cfg.confirm("审核期间该条记录将不能被修改，确定提交审核吗?").then(()=>{ scope.ps.vc.row.audit_status=2; scope.ps.vc.submit() })
+                        } '''
+                })
+        ops += [
+            {'label':'保存','editor':'com-op-van-btn',
+             'type':'primary',
+             'show':'scope.vc.row.audit_status !=1',
+             'action':'''if(scope.ps.vc.isValid()){ 
+                  cfg.show_load();scope.ps.vc.submit().then(()=>{cfg.hide_load();cfg.toast("保存成功")}) 
+              }'''
+             }
+        ]
+        return ops
+        
         
 
 class JobinfUserList(ModelTableMobile):
@@ -36,6 +66,12 @@ class JobinfUserList(ModelTableMobile):
     nolimit=True
     def inn_filter(self, query):
         return query.filter(status=1).order_by('-update_time')
+    
+    def dict_row(self, inst):
+        return {
+            'com__name':inst.com.name,
+            'com__contact':inst.com.contact,
+        }
     
     class filters(RowFilter):
         names =['position','com__name']
@@ -69,8 +105,8 @@ class MyJobinfoList(ModelTableMobile):
             head['class_express'] ='scope.row.status==1?"online":"offline"'
         return head
     
-    def dict_row(self, inst):
-        return { '_director_name':'jobinfoform'}
+    #def dict_row(self, inst):
+        #return { '_director_name':'jobinfoform'}
     
     def inn_filter(self, query):
         return query.filter(com=self.crt_user.companyinfo).order_by('-update_time')
@@ -80,9 +116,11 @@ class MyJobinfoList(ModelTableMobile):
 director.update({
     'jobinfo':JobInfoPage.tableCls,
     'jobinfo.edit':JobinfoForm,
-    'jobinfoform':JobinfoUserForm,
+   
     'jobinfolist':JobinfUserList,
     'MyJobinfoList':MyJobinfoList,
+    'MyJobinfoList.edit':JobinfoUserForm,
+     #'jobinfoform':JobinfoUserForm,
 })
 page_dc.update({
     'jobinfo':JobInfoPage

@@ -10,6 +10,7 @@
                     <div class="name" v-text="ctx.row.worker__name"></div>
                 </div>
 
+
                 <table class="mytable">
                     <tr>
                         <td>期望薪酬:</td>
@@ -20,7 +21,7 @@
                         <td v-text="ctx.row.worker__contact"></td>
                     </tr>
                     <tr>
-                        <td>地址:</td>
+                        <td>当前住址:</td>
                         <td v-text="ctx.row.worker__address"></td>
                     </tr>
                     <tr>
@@ -29,9 +30,6 @@
                     </tr>
                 </table>
 
-                <div class="cert">
-                    <img @click="on_click_image(item)" class="item" v-for="item in ctx.row.cert_images" :src="item" alt="">
-                </div>
 
                 <div class="key-words">
                     <img src="/static/images/关键字.png" alt="">
@@ -39,6 +37,12 @@
                     <span  v-text="ctx.row.key_words"></span>
                 </div>
 
+            </div>
+            <div  class="detail">
+                <div class="title">证书</div>
+                <div class="cert">
+                    <img @click="on_click_image(item)" class="item" v-for="item in ctx.row.cert_images" :src="item" alt="">
+                </div>
             </div>
             <div class="detail">
                 <div class="title">详细</div>
@@ -88,12 +92,16 @@
         margin: .2rem .1rem;
     }
     .mytable{
+        margin-top:.3rem;
         td{
             padding: .1rem 0 .1rem .3rem;
             min-width: 2.2rem;
         }
         td:first-child{
             text-align: right;
+        }
+        td:last-child{
+            padding-left: .3rem;
         }
     }
 
@@ -108,8 +116,8 @@
     }
 
     .key-words{
-        margin-top:.5rem;
-        padding: .3rem .2rem;
+        margin-top:.2rem;
+        padding: .3rem .1rem;
         color: #747474;
         font-size: .25rem;
         img{
@@ -129,11 +137,15 @@
             margin-bottom: .3rem;
         }
     }
+    td:first-child{
+        color: #767676;
+    }
     .head-panel{
         display:flex;
         justify-content:space-around;
         .head{
-            padding:.3rem;
+            border: 1px solid #eeeeee;
+            padding:.1rem;
             img{
                 max-width: 2rem;
                 max-height: 2rem;

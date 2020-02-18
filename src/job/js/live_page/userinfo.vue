@@ -1,6 +1,9 @@
 <template>
     <div class="com-live-userinfo">
         <com-uis-nav-bar  :title="ctx.title" :back="true" :ops="ctx.ops"></com-uis-nav-bar>
+
+        <div style="text-align: center;margin: .4rem;color: #878787" v-text="ctx.username"></div>
+
         <div class="content">
             <van-button type="primary" size="large" @click="quit()">退出登录</van-button>
         </div>

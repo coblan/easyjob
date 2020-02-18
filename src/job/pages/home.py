@@ -6,7 +6,7 @@ from job.admin_seekjob import SeekjobUserList,Seekjob_Company
 
 class Home(object):
     def __init__(self, request, engin):
-        pass
+        self.request =request
     
     def get_template(self):
         return 'mobile/live_show.html'
@@ -19,7 +19,7 @@ class Home(object):
         return {
              'editor_ctx':{
                  'layout_editors':[
-                    {'editor':'com-top-home-brand',},
+                    {'editor':'com-top-home-brand','username':self.request.user.username},
                     #{   
                         #'editor':'com-layout-grid',
                         #'heads':[

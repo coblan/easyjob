@@ -10,7 +10,7 @@
                        <img class="label-img" src="/static/images/企业.png" alt="">
                    </td>
                    <td>
-                       <span v-text="row.com_name"></span>
+                       <span v-text="row.com__name"></span>
                    </td>
                </tr>
                <tr>
@@ -35,7 +35,7 @@
                        <img class="label-img" src="/static/images/联系.png" alt="">
                    </td>
                    <td>
-                       <span v-text="row.contact"></span>
+                       <span v-text="row.com__contact"></span>
                    </td>
                </tr>
 

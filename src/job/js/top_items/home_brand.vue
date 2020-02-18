@@ -9,9 +9,10 @@
 
 <script>
     export default {
+        props:['ctx'],
         methods:{
             on_click(){
-                live_root.open_live('live_userinfo',{title:"我的账号"})
+                live_root.open_live('live_userinfo',{title:"我的账号",username:this.ctx.username})
             }
         }
     }

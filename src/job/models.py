@@ -13,8 +13,8 @@ COM_INFO_STATUS=(
 class CompanyInfo(models.Model):
     user = models.OneToOneField(User,verbose_name = '账号')
     name = models.CharField('公司名称',max_length=200)
-    contact = models.CharField('联系方式',max_length=200,)
-    address = models.CharField('地址',max_length=400,blank=True)
+    contact = models.CharField('电话',max_length=200,)
+    address = models.CharField('公司地址',max_length=400,blank=True)
     license = PictureField('营业执照',blank=True,max_length=300)
     account_certificate = PictureField('开户许可证书',blank=True,max_length=300)
     qualification_certificate = PictureField('资质证书',blank=True,max_length=300)
@@ -42,7 +42,7 @@ class JobInfo(models.Model):
     #title = models.CharField('标题',max_length=100)
     position = models.CharField('职位',max_length=100)
     #com_name = models.CharField('公司名称',max_length=200)
-    #address = models.CharField('地址',max_length=400,blank=True)
+    address = models.CharField('上班地址',max_length=400,blank=True)
     pay= models.CharField('薪酬待遇',max_length=100,blank=True)
     require_time = models.CharField('要求时间',max_length=100,blank=True)
     #contact = models.CharField('联系方式',max_length=200,)
@@ -59,7 +59,7 @@ class JobInfo(models.Model):
 class WorkInfo(models.Model):
     user = models.OneToOneField(User,verbose_name = '账号')
     name = models.CharField('姓名',max_length=200,blank=True)
-    contact = models.CharField('联系方式',max_length=200,blank=True)
+    contact = models.CharField('电话',max_length=200,blank=True)
     address = models.CharField('地址',max_length=400,blank=True)
     head = PictureField('头像',blank=True,max_length = 300)
     id_face1 = PictureField('身份证正面',blank=True,max_length=300)

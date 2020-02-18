@@ -2,7 +2,7 @@
     <div class="com-top-seekjob-item">
         <div class="row-panel" v-for="row in rows" @click="on_click(row)">
             <div class="head">
-                <img :src="row.worker__head" alt="">
+                <img :src="row.worker__head || '/static/images/头像.png'" alt="">
             </div>
             <div>
                 <div v-text="row.worker__name"></div>
@@ -50,8 +50,8 @@
     margin-right:.5rem;
 
     img{
-        max-width: 1.5rem;
-        max-height: 1.5rem;
+        max-width: 1rem;
+        max-height: 1.2rem;
     }
 }
 

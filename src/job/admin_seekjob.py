@@ -1,4 +1,4 @@
-from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,director
+from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,director,RowFilter
 from .models import SeekJobInfo
 from helpers.mobile.shortcut import ModelFieldsMobile,ModelTableMobile
 
@@ -21,8 +21,8 @@ class SeekJobForm(ModelFields):
     
 
 class SeekJobUserForm(ModelFieldsMobile):
-    readonly=['audit_status']
     hide_fields=['worker']
+    nolimit=True
     class Meta:
         model = SeekJobInfo
         exclude =[]
@@ -38,6 +38,8 @@ class SeekJobUserForm(ModelFieldsMobile):
             head['required']= True
         if head['name'] not in ['audit_status','status']:
             head['readonly'] = 'scope.row.audit_status !=1'
+        if head['name'] == 'audit_status':
+            head ['readonly'] = True
         return head
     
     #def clean_save(self):
@@ -69,14 +71,18 @@ class SeekJobUserForm(ModelFieldsMobile):
 
 class SeekjobUserList(ModelTableMobile):
     model = SeekJobInfo
+    nolimit=True
     exclude =[ ]
     fields_sort=['key_words','status']
+    
+    def inn_filter(self, query):
+        return query.filter(worker = self.crt_user.workinfo)
     
 
 class Seekjob_Company(ModelTableMobile):
     model = SeekJobInfo
     exclude =[]
-    
+    nolimit=True
     #def inn_filter(self, query):
         #return query.anotate(head = ) 
         
@@ -97,6 +103,10 @@ class Seekjob_Company(ModelTableMobile):
             'worker__address':inst.worker.address,
             'cert_images':cert_img
         }
+    
+    class filters(RowFilter):
+        names = ['key_words',]
+        icontains = ['key_words',]
 
 director.update({
     'seekjob':SeekJobPage.tableCls,

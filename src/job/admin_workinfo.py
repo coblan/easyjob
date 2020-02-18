@@ -21,6 +21,7 @@ class WorkinfoForm(ModelFields):
 
 
 class WorkinfoFormBase(ModelFieldsMobile):
+    nolimit=True
     class Meta:
         model = WorkInfo
         exclude =[]
