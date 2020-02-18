@@ -78,6 +78,9 @@ class SeekjobUserList(ModelTableMobile):
     def inn_filter(self, query):
         return query.filter(worker = self.crt_user.workinfo)
     
+    def get_operation(self):
+        return []
+    
 
 class Seekjob_Company(ModelTableMobile):
     model = SeekJobInfo

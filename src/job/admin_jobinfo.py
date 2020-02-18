@@ -111,6 +111,9 @@ class MyJobinfoList(ModelTableMobile):
     def inn_filter(self, query):
         return query.filter(com=self.crt_user.companyinfo).order_by('-update_time')
     
+    def get_operation(self):
+        return []
+    
     
 
 director.update({
