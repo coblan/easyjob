@@ -1,5 +1,6 @@
 from hello.engin_menu import mb_page
 from ..admin_workinfo import WorkinfoBase,WorkinfoIdFace,Workinfo_education,WorkinfoAgreement
+from helpers.director.kv import get_value
 
 class WorkerCert(object):
     def __init__(self, request, engin):
@@ -83,7 +84,18 @@ class WorkerCert(object):
                                          'progress_ctx':{
                                              'title':'审核进度',
                                              'init_express':'cfg.show_load();ex.director_call("workerinfo/progress").then(resp=>{cfg.hide_load();scope.vc.active = resp})',
-                                             'submit_info_express':'cfg.show_load();ex.director_call("workerinfo/submit_info").then(resp=>{cfg.hide_load();cfg.toast("服务者认证申请已经提交成功，请耐心等待!");scope.vc.active = resp})',
+                                             'submit_info_express':'''cfg.pop_vue_com("com-pop-protocal",scope.vc.ctx.protocal_ctx)
+                                             .then(()=>{
+                                                 cfg.show_load();
+                                                 return ex.director_call("workerinfo/submit_info")
+                                             }).then(resp=>{
+                                                 cfg.hide_load();
+                                                 cfg.toast("服务者认证申请已经提交成功，请耐心等待!");
+                                                 scope.vc.active = resp
+                                             })'''  ,
+                                              'protocal_ctx':{
+                                                  'content':get_value('worker_cert_protocol','求职者认证协议不能为空!')
+                                              }
                                          }
                                     }
                                 ]

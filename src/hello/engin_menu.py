@@ -37,7 +37,11 @@ class PcMenu(BaseEngine):
                  {'label':'求职信息','url':page('seekjob')}
              ]
              },
-   
+            
+             {'label':'协议管理','icon':fa('fa-truck'),'url':page('configpage')},
+             
+            {'label':'帮助管理','icon':fa('fa-truck'),'url':page('myhelp')},
+
             {'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
              'submenu': [
                  #{'label': '微信用户', 'url': page('wxuserinfo'), 'visible': can_touch(Group, crt_user)},

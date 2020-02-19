@@ -2,6 +2,7 @@ from hello.engin_menu import mb_page
 from django.conf import settings
 from helpers.director.shortcut import get_request_cache
 from job.admin_companyinfo import CompanyInfoBasic,CompanyInfoLicense,CompanyInfoaccount_certificate,CompanyInfo_qualification_certificate
+from helpers.director.kv import get_value
 
 class Comcert(object):
     def __init__(self, request, engin):
@@ -49,7 +50,20 @@ class Comcert(object):
                                   'progress_ctx':{
                                       'title':'审核进度',
                                       'init_express':'cfg.show_load();ex.director_call("CompanyInfo/progress").then(resp=>{cfg.hide_load();scope.vc.active = resp})',
-                                      'submit_info_express':'cfg.show_load();ex.director_call("CompanyInfo/submit_info").then(resp=>{cfg.hide_load();cfg.toast("申请已经提交，请耐心等待!");scope.vc.active = resp})',
+                                      'submit_info_express':'''cfg.pop_vue_com("com-pop-protocal",scope.vc.ctx.protocal_ctx) 
+                                      .then(()=>{
+                                          cfg.show_load();
+                                          return ex.director_call("CompanyInfo/submit_info")
+                                      }).then(resp=>{
+                                          cfg.hide_load();
+                                          cfg.toast("申请已经提交，请耐心等待!");
+                                          scope.vc.active = resp
+                                      })
+                                     ''' ,
+                                      'protocal_ctx':{
+                                          'content':get_value('company_cert_protocol','商户认证协议不能为空!')
+                                      }
+                                      
                                   }
                                   },
                              ]}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from helpers.director.model_func.cus_fields.cus_picture import PictureField
+from helpers.director.model_func.cus_fields.richtext import RichtextField
 # Create your models here.
 
     
@@ -61,9 +62,9 @@ class WorkInfo(models.Model):
     name = models.CharField('姓名',max_length=200,blank=True)
     contact = models.CharField('电话',max_length=200,blank=True)
     address = models.CharField('地址',max_length=400,blank=True)
-    head = PictureField('头像',blank=True,max_length = 300)
+    head = PictureField('头像',blank=True,max_length = 300,help_text='2寸标准证件照')
     id_face1 = PictureField('身份证正面',blank=True,max_length=300)
-    id_face2 = PictureField('身份证方面',blank=True,max_length=300)
+    id_face2 = PictureField('身份证反面',blank=True,max_length=300)
     
     education = PictureField('学历证明',blank=True,max_length=300)
     vocational_certificate = PictureField('职业证书',blank=True,max_length=300)
@@ -90,3 +91,10 @@ class SeekJobInfo(models.Model):
     def __str__(self):
         return self.key_words
     
+    
+class MyHelp(models.Model):
+    title = models.CharField('标题',max_length=300)
+    content = RichtextField('内容',)
+    
+    def __str__(self):
+        return self.title

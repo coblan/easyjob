@@ -3,6 +3,7 @@ from django.conf import settings
 from helpers.director.shortcut import get_request_cache
 from job.admin_jobinfo import JobinfoUserForm,JobinfUserList,MyJobinfoList
 from job.admin_seekjob import SeekjobUserList,Seekjob_Company
+from job.admin_help import MyhelpUserList
 
 class Home(object):
     def __init__(self, request, engin):
@@ -138,7 +139,18 @@ class Home(object):
                                      {'editor':'com-top-kefu','phone':'0831-2022777','worktime':'工作日9:00-17:00'},
                                  ]
                              }
+                             },
+                             {'label':'帮助',
+                             'icon':'/static/images/帮助.png',
+                             'action':'live_root.open_live("live_list",scope.head.table_ctx)',
+                             'table_ctx':{
+                                 'title':'帮助中心',
+                                  'table_editor': 'com-list-row-cell',
+                                 'block_click':'live_root.open_live("live_html",scope.row)',
+                                 **MyhelpUserList().get_context()
                              }
+                             },
+                            
                         ]
                     }
                  ]
