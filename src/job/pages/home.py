@@ -154,55 +154,6 @@ class Home(object):
                         ]
                     },
                     
-                    {
-                        'editor':'com-van-grid',
-                        'title':'其他',
-                        'heads':[
-                            {'label':'资料下载','icon':'/static/images/下载.png',
-                             'action':'live_root.open_live("live_layout",scope.head.live_ctx)',
-                              'live_ctx':{
-                                  'layout_editors':[
-                                      {'editor':'com-lay-navbar','title':'资料下载',},
-                                      
-                                      {'editor':'com-top-filedownload',
-                                       'title':'企业',
-                                       'files':[
-                                          {'url':'/static/material/易职通平台服务合同（企业）.docx','label':'易职通平台服务合同（企业认证）'},
-                                          {'url':'/static/material/服务完成确认单.docx','label':'服务完成确认单'},
-                                          
-                                          ]},
-                                      
-                                      {'editor':'com-top-filedownload',
-                                       'title':'求职者',
-                                       'files':[
-                                          {'url':'/static/material/自由职业者服务协议.docx','label':'自由职业者服务协议(求职者认证)'}
-                                          ]},
-                                  ]
-                              }
-                             },
-                            {'label':'客服',
-                             'icon':'/static/images/客服.png',
-                             'action':'live_root.open_live("live_layout",scope.head.live_ctx)',
-                             'live_ctx':{
-                                 'layout_editors':[
-                                     {'editor':'com-lay-navbar','title':'客服',},
-                                     {'editor':'com-top-kefu','phone':'0831-2022777','worktime':'工作日9:00-17:00'},
-                                 ]
-                             }
-                             },
-                             {'label':'帮助',
-                             'icon':'/static/images/帮助.png',
-                             'action':'live_root.open_live("live_list",scope.head.table_ctx)',
-                             'table_ctx':{
-                                 'title':'帮助中心',
-                                  'table_editor': 'com-list-row-cell',
-                                 'block_click':'live_root.open_live("live_html",scope.row)',
-                                 **MyhelpUserList().get_context()
-                             }
-                             },
-                            
-                        ]
-                    }
                  ]
             },
              'editor':'live_layout',
