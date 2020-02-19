@@ -21,6 +21,7 @@ class MyhelpForm(ModelFields):
         
 
 class MyhelpUserList(ModelTableMobile):
+    nolimit = True
     model = MyHelp
     exclude= []
     fields_sort=['title']
