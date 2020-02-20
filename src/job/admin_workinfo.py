@@ -67,10 +67,10 @@ class Workinfo_education(WorkinfoFormBase):
         model = WorkInfo
         fields = ['education','vocational_certificate','skills_certificate']
 
-class WorkinfoAgreement(WorkinfoFormBase):
-    class Meta:
-        model = WorkInfo
-        fields = ['service_agreement']
+#class WorkinfoAgreement(WorkinfoFormBase):
+    #class Meta:
+        #model = WorkInfo
+        #fields = ['service_agreement']
 
 
 @director_view('workerinfo/progress')
@@ -89,8 +89,8 @@ def submit_info():
         raise UserWarning('请完善基本信息后再提交审核')
     if not info.id_face1 or not info.id_face2:
         raise UserWarning('请完上传身份证正反面')
-    if not info.service_agreement:
-        raise UserWarning('请上传自由职业者服务者协议')
+    #if not info.service_agreement:
+        #raise UserWarning('请上传自由职业者服务者协议')
     info.status = 1
     info.save()
     return info.status
@@ -103,7 +103,7 @@ director.update({
     'workinfo.base':WorkinfoBase,
     'workinfo.idface':WorkinfoIdFace,
     'workinfo.education':Workinfo_education,
-    'workinfo.agreement':WorkinfoAgreement,
+    #'workinfo.agreement':WorkinfoAgreement,
 })
 
 page_dc.update({

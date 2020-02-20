@@ -69,7 +69,7 @@ class WorkInfo(models.Model):
     education = PictureField('学历证明',blank=True,max_length=300)
     vocational_certificate = PictureField('职业证书',blank=True,max_length=300)
     skills_certificate = PictureField('技能证书',blank=True,max_length=300)
-    service_agreement = PictureField('自由职业者服务协议',blank=True,max_length=300)
+    #service_agreement = PictureField('自由职业者服务协议',blank=True,max_length=300)
 
     update_time = models.DateTimeField(verbose_name='更新时间',auto_now=True)
     status = models.IntegerField(verbose_name='当前状态',choices=COM_INFO_STATUS,default=0)

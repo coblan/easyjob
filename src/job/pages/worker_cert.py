@@ -1,5 +1,5 @@
 from hello.engin_menu import mb_page
-from ..admin_workinfo import WorkinfoBase,WorkinfoIdFace,Workinfo_education,WorkinfoAgreement
+from ..admin_workinfo import WorkinfoBase,WorkinfoIdFace,Workinfo_education #,WorkinfoAgreement
 from helpers.director.kv import get_value
 
 class WorkerCert(object):
@@ -51,15 +51,15 @@ class WorkerCert(object):
                                     #{
                                         #'label':'技能证书'
                                     #},
-                                    {
-                                        'label':'自由职业者服务协议',
-                                        'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
-                                         'fields_ctx':{
-                                             'title':'服务协议',
-                                             **WorkinfoAgreement().get_context()
-                                             }
+                                    #{
+                                        #'label':'自由职业者服务协议',
+                                        #'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+                                         #'fields_ctx':{
+                                             #'title':'服务协议',
+                                             #**WorkinfoAgreement().get_context()
+                                             #}
                                         
-                                    },
+                                    #},
                             
                                ]
                                 
