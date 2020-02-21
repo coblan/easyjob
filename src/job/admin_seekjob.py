@@ -88,6 +88,9 @@ class Seekjob_Company(ModelTableMobile):
     nolimit=True
     #def inn_filter(self, query):
         #return query.anotate(head = ) 
+    
+    def inn_filter(self, query):
+        return query.filter(status =1 ).order_by('-update_time')
         
     def dict_row(self, inst):
         cert_img = []
