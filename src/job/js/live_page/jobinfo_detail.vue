@@ -151,10 +151,11 @@
     margin-top:.3rem;
     td{
         padding: .1rem 0 .1rem .3rem;
-        min-width: 2.2rem;
+        min-width: 1.6rem;
     }
     td:first-child{
-        text-align: right;
+        text-align: left;
+        color: #999999;
     }
     td:last-child{
         padding-left: .3rem;
