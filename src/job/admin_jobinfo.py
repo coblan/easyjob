@@ -68,14 +68,19 @@ class JobinfUserList(ModelTableMobile):
         return query.filter(status=1).order_by('-update_time')
     
     def dict_row(self, inst):
+        papers = [inst.plat_contract,inst.contract,inst.bid]
+        
         return {
             'com__name':inst.com.name,
             'com__contact':inst.com.contact,
+            'papers':papers,
+            
         }
     
     class filters(RowFilter):
-        names =['position','com__name']
-        icontains = ['position','com__name']
+        names =['key_words','position','com__name']
+        icontains = ['position','com__name','key_words']
+        fields_sort = ['key_words','position','com__name']
         
         def getExtraHead(self):
             return [

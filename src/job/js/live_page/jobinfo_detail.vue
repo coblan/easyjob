@@ -41,9 +41,23 @@
 
            </table>
 
+
+           <div class="key-words">
+               <img src="/static/images/关键字.png" alt="">
+               <span>关键字:</span>
+               <span  v-text="ctx.row.key_words"></span>
+           </div>
+
        </div>
         <div class="detail">
-            <div class="title">详细</div>
+            <div class="title">相关资料</div>
+            <div class="image-detail">
+                <img @click="on_click_image(item)" class="item" v-for="item in ctx.row.papers" :src="item" alt="">
+            </div>
+        </div>
+
+        <div class="detail">
+            <div class="title">详细描述</div>
             <div v-text="row.detail"></div>
         </div>
         <div class="update_time">
@@ -65,6 +79,9 @@
             mytime(time){
                 return moment(time).fromNow()
             },
+            on_click_image(url){
+                cfg.open_image(url)
+            }
         }
     }
 </script>
@@ -89,6 +106,28 @@
         padding: .4rem 0 .2rem .4rem;
     }
 }
+
+.key-words{
+    margin-top:.2rem;
+    padding: .3rem .1rem;
+    color: #747474;
+    font-size: .25rem;
+    img{
+        width: .3rem;
+    }
+}
+
+.image-detail{
+    text-align:center;
+img{
+    max-width: 2rem;
+    max-height: 2rem;
+    display: inline-block;
+    padding: .1rem;
+}
+}
+
+
 .item-content{
     td{
         padding: .1rem .2rem;
