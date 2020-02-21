@@ -97,8 +97,8 @@ class Seekjob_Company(ModelTableMobile):
             cert_img.append(inst.worker.vocational_certificate)
         if inst.worker.skills_certificate:
             cert_img.append(inst.worker.skills_certificate)
-        if inst.worker.service_agreement:
-            cert_img.append(inst.worker.service_agreement)
+        #if inst.worker.service_agreement:
+            #cert_img.append(inst.worker.service_agreement)
         return {
             'worker__head':inst.worker.head,
             'worker__name':inst.worker.name,
