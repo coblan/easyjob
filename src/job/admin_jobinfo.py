@@ -78,9 +78,9 @@ class JobinfUserList(ModelTableMobile):
         }
     
     class filters(RowFilter):
-        names =['key_words','position','com__name']
-        icontains = ['position','com__name','key_words']
-        fields_sort = ['key_words','position','com__name']
+        names =['key_words','position','address','com__name']
+        icontains = ['position','address','com__name','key_words']
+        fields_sort = ['position','address','key_words','com__name']
         
         def getExtraHead(self):
             return [
