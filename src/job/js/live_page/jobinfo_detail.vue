@@ -4,10 +4,48 @@
        <div class="title-panel">
            <div class="title" v-text="row.position"></div>
            <div class="pay" v-text="row.pay"></div>
-           <table class="item-content">
+           <!--<table class="item-content">-->
+               <!--<tr>-->
+                   <!--<td>-->
+                       <!--<img class="label-img" src="/static/images/企业.png" alt="">-->
+                   <!--</td>-->
+                   <!--<td>-->
+                       <!--<span v-text="row.com__name"></span>-->
+                   <!--</td>-->
+               <!--</tr>-->
+               <!--<tr>-->
+                   <!--<td>-->
+                       <!--<img class="label-img" src="/static/images/时间 .png" alt="">-->
+                   <!--</td>-->
+                   <!--<td>-->
+                       <!--<span v-text=" row.require_time"></span>-->
+                   <!--</td>-->
+               <!--</tr>-->
+               <!--<tr>-->
+                   <!--<td>-->
+                       <!--<img class="label-img" src="/static/images/地址.png" alt="">-->
+                   <!--</td>-->
+                   <!--<td>-->
+                       <!--<span v-text="row.address"></span>-->
+                   <!--</td>-->
+
+               <!--</tr>-->
+               <!--<tr>-->
+                   <!--<td>-->
+                       <!--<img class="label-img" src="/static/images/联系.png" alt="">-->
+                   <!--</td>-->
+                   <!--<td>-->
+                       <!--<span v-text="row.com__contact"></span>-->
+                   <!--</td>-->
+               <!--</tr>-->
+
+           <!--</table>-->
+
+
+           <table class="mytable">
                <tr>
                    <td>
-                       <img class="label-img" src="/static/images/企业.png" alt="">
+                       企业名称:
                    </td>
                    <td>
                        <span v-text="row.com__name"></span>
@@ -15,7 +53,7 @@
                </tr>
                <tr>
                    <td>
-                       <img class="label-img" src="/static/images/时间 .png" alt="">
+                       要求时间:
                    </td>
                    <td>
                        <span v-text=" row.require_time"></span>
@@ -23,7 +61,7 @@
                </tr>
                <tr>
                    <td>
-                       <img class="label-img" src="/static/images/地址.png" alt="">
+                      上班地址:
                    </td>
                    <td>
                        <span v-text="row.address"></span>
@@ -32,7 +70,7 @@
                </tr>
                <tr>
                    <td>
-                       <img class="label-img" src="/static/images/联系.png" alt="">
+                      联系电话:
                    </td>
                    <td>
                        <span v-text="row.com__contact"></span>
@@ -40,6 +78,7 @@
                </tr>
 
            </table>
+
 
 
            <div class="key-words">
@@ -104,9 +143,23 @@
     .pay{
         color: #eba324;
         padding: .4rem 0 .2rem .4rem;
+        text-align: right;
     }
 }
 
+.mytable{
+    margin-top:.3rem;
+    td{
+        padding: .1rem 0 .1rem .3rem;
+        min-width: 2.2rem;
+    }
+    td:first-child{
+        text-align: right;
+    }
+    td:last-child{
+        padding-left: .3rem;
+    }
+}
 .key-words{
     margin-top:.2rem;
     padding: .3rem .1rem;

@@ -88,7 +88,7 @@ class Home(object):
                           'action':'live_root.open_live("live_list",scope.head.table_ctx)',
                           'table_ctx':{'title':'需求职位',
                                        'table_editor':'com-list-jobinfo-item',
-                                       'block_click':'live_root.open_live("live_jobinfo_detail",{row:scope.row})',
+                                       'block_click':'live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情"})',
                                        **JobinfUserList().get_head_context()} },
                         {'label':'我的求职',
                          'icon':'/static/images/请求.png',
