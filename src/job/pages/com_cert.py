@@ -43,7 +43,7 @@ class Comcert(object):
                                  
                               ]
                              },
-                            {'label':'其他',
+                            {'label':'审核',
                              'cells':[
                                  {'label':'审核进度',
                                   'action':'live_root.open_live("live_com_cert_progress",scope.head.progress_ctx)',

@@ -63,13 +63,14 @@ class Home(object):
                          {'label':'我的发布',
                           'icon':'/static/images/发放.png',
                           'table_ctx':{'title':'我发布的职位',
-                                       'table_editor':'com-list-row-cell',
-                                       'fields_ctx':{ 'title':'发布招工',
-                                                      'after_save':'cfg.toast("修改成功!");setTimeout(()=>{history.back()},1500);',
-                                                      **JobinfoUserForm().get_context() },
-                                       'block_click':'''scope.ps.vc.ctx.fields_ctx.row=scope.row;
-                                       scope.ps.vc.ctx.fields_ctx.title=scope.row.position;
-                                       live_root.open_live("live_fields",scope.ps.vc.ctx.fields_ctx)''',
+                                       #'table_editor':'com-list-row-cell',
+                                       #'fields_ctx':{ 
+                                                      #'after_save':'cfg.toast("修改成功!");setTimeout(()=>{history.back()},1500);',
+                                                      #**JobinfoUserForm().get_context(),
+                                                      #},
+                                       #'block_click':'''debugger;scope.ps.vc.ctx.fields_ctx.row=scope.row;
+                                       #scope.ps.vc.ctx.fields_ctx.title=scope.row.position;
+                                       #live_root.open_live("live_fields",scope.ps.vc.ctx.fields_ctx)''',
                                        **MyJobinfoList().get_head_context()}, 
                            'action':'live_root.open_live("live_list",scope.head.table_ctx)',
                            },
@@ -86,10 +87,12 @@ class Home(object):
                            },
                          {'label':'招工信息','icon':'/static/images/工厂招工.png',
                           'action':'live_root.open_live("live_list",scope.head.table_ctx)',
-                          'table_ctx':{'title':'需求职位',
-                                       'table_editor':'com-list-jobinfo-item',
-                                       'block_click':'live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情"})',
-                                       **JobinfUserList().get_head_context()} },
+                          'table_ctx':{
+                              **JobinfUserList().get_head_context(),
+                              'title':'需求职位',
+                                'table_editor':'com-list-jobinfo-item',
+                                'block_click':'live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情"})',
+                                       } },
                         {'label':'我的求职',
                          'icon':'/static/images/请求.png',
                          'table_ctx':{'title':'我的求职',

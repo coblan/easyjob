@@ -65,7 +65,7 @@ class WorkerCert(object):
                                 
                             },
                             {
-                                'label':'其他',
+                                'label':'审核',
                                 'cells':[
                                     #{'label':'资料下载',
                                      #'action':'live_root.open_live("live_layout",scope.head.live_ctx)',

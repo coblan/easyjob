@@ -56,6 +56,9 @@ class JobInfo(models.Model):
     bid = PictureField('中标书',max_length=300,blank=True)
     status = models.IntegerField('在线状态',choices=INFO_STATUS,default=1)
     audit_status = models.IntegerField('审批状态',choices=AUDIT_STATUS,default=1)
+    
+    def __str__(self):
+        return self.position
 
 
 class WorkInfo(models.Model):

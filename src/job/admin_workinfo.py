@@ -44,7 +44,11 @@ class WorkinfoFormBase(ModelFieldsMobile):
         if self.instance.status != 0:
             return []
         else:
-            return super().get_operations()
+            ops = super().get_operations()
+            for op in ops:
+                if op['name']  == 'save':
+                    op['label'] = '保存'
+            return ops
 
 class WorkinfoBase(WorkinfoFormBase):
     class Meta:

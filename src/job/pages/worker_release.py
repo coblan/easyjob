@@ -14,7 +14,7 @@ class WorkerRelease(object):
         return {
              'editor':'live_fields',
              'editor_ctx':{ 
-                 'title':'发布招工',
+                 'title':'发布求职',
                  'back_action':'location="/mb/index"',
                   'after_save':'cfg.toast("提交成功!");setTimeout(()=>{history.back()},1500)',
                    **SeekJobUserForm().get_context() 
