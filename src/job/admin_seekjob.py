@@ -40,6 +40,9 @@ class SeekJobUserForm(ModelFieldsMobile):
             head['readonly'] = 'scope.row.audit_status !=1'
         if head['name'] == 'audit_status':
             head ['readonly'] = True
+        if head['name'] == 'status':
+            head['editor'] = 'com-field-switch'
+            head['int_bool'] = True
         return head
     
     #def clean_save(self):
