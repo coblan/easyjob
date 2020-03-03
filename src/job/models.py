@@ -28,8 +28,9 @@ class CompanyInfo(models.Model):
     
     
 INFO_STATUS=(
+    (0,'离线'),
     (1,'在线'),
-    (2,'离线'),
+    #(2,'离线')
 )
 
 AUDIT_STATUS=(
