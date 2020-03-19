@@ -1,3 +1,6 @@
 [submodule "src/helpers"]
 	path = src/helpers
 	url = git@github.com:coblan/helpers.git
+[submodule "script/fastdog"]
+	path = script/fastdog
+	url = git@github.com:coblan/fastdog.git
