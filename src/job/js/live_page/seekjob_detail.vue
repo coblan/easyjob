@@ -46,7 +46,7 @@
             </div>
             <div class="detail">
                 <div class="title">详细</div>
-                <div v-text="ctx.row.desp"></div>
+                <pre class="mycontent" v-text="ctx.row.desp"></pre>
             </div>
             <div class="update_time">
                 <span class="mylabel">更新于:</span>
@@ -136,6 +136,11 @@
             font-weight: 500;
             border-bottom: 1px solid #e6e6e6;
             margin-bottom: .3rem;
+        }
+        .mycontent{
+            font-size: .26rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     }
 

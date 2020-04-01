@@ -60,7 +60,8 @@
 
             <div class="detail">
                 <div class="title">详细描述</div>
-                <div v-text="row.detail"></div>
+                <pre class="mycontent" v-text="row.detail"></pre>
+                <!--<div v-text="row.detail"></div>-->
             </div>
             <div class="update_time">
                 <span class="mylabel">更新于:</span>
@@ -165,6 +166,11 @@ img{
         font-weight: 500;
         border-bottom: 1px solid #e6e6e6;
         margin-bottom: .3rem;
+    }
+    .mycontent{
+        font-size: .26rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
 }
 .label-img{
