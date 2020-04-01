@@ -1,108 +1,74 @@
 <template>
     <div class="com-jobinfo-detail">
         <com-uis-nav-bar  :title="ctx.title" :back="true" :ops="ctx.ops"></com-uis-nav-bar>
-       <div class="title-panel">
-           <div class="title" v-text="row.position"></div>
-           <div class="pay" v-text="row.pay"></div>
-           <!--<table class="item-content">-->
-               <!--<tr>-->
-                   <!--<td>-->
-                       <!--<img class="label-img" src="/static/images/企业.png" alt="">-->
-                   <!--</td>-->
-                   <!--<td>-->
-                       <!--<span v-text="row.com__name"></span>-->
-                   <!--</td>-->
-               <!--</tr>-->
-               <!--<tr>-->
-                   <!--<td>-->
-                       <!--<img class="label-img" src="/static/images/时间 .png" alt="">-->
-                   <!--</td>-->
-                   <!--<td>-->
-                       <!--<span v-text=" row.require_time"></span>-->
-                   <!--</td>-->
-               <!--</tr>-->
-               <!--<tr>-->
-                   <!--<td>-->
-                       <!--<img class="label-img" src="/static/images/地址.png" alt="">-->
-                   <!--</td>-->
-                   <!--<td>-->
-                       <!--<span v-text="row.address"></span>-->
-                   <!--</td>-->
+        <div class="after-nav-content">
+            <div class="title-panel">
+                <div class="title" v-text="row.position"></div>
+                <div class="pay" v-text="row.pay"></div>
+                <table class="mytable">
+                    <tr>
+                        <td>
+                            企业名称:
+                        </td>
+                        <td>
+                            <span v-text="row.com__name"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            要求时间:
+                        </td>
+                        <td>
+                            <span v-text=" row.require_time"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            上班地址:
+                        </td>
+                        <td>
+                            <span v-text="row.address"></span>
+                        </td>
 
-               <!--</tr>-->
-               <!--<tr>-->
-                   <!--<td>-->
-                       <!--<img class="label-img" src="/static/images/联系.png" alt="">-->
-                   <!--</td>-->
-                   <!--<td>-->
-                       <!--<span v-text="row.com__contact"></span>-->
-                   <!--</td>-->
-               <!--</tr>-->
+                    </tr>
+                    <tr>
+                        <td>
+                            联系电话:
+                        </td>
+                        <td>
+                            <span v-text="row.com__contact"></span>
+                        </td>
+                    </tr>
 
-           <!--</table>-->
-
-
-           <table class="mytable">
-               <tr>
-                   <td>
-                       企业名称:
-                   </td>
-                   <td>
-                       <span v-text="row.com__name"></span>
-                   </td>
-               </tr>
-               <tr>
-                   <td>
-                       要求时间:
-                   </td>
-                   <td>
-                       <span v-text=" row.require_time"></span>
-                   </td>
-               </tr>
-               <tr>
-                   <td>
-                      上班地址:
-                   </td>
-                   <td>
-                       <span v-text="row.address"></span>
-                   </td>
-
-               </tr>
-               <tr>
-                   <td>
-                      联系电话:
-                   </td>
-                   <td>
-                       <span v-text="row.com__contact"></span>
-                   </td>
-               </tr>
-
-           </table>
+                </table>
 
 
 
-           <div class="key-words">
-               <img src="/static/images/关键字.png" alt="">
-               <span>关键字:</span>
-               <span  v-text="ctx.row.key_words"></span>
-           </div>
+                <div class="key-words">
+                    <img src="/static/images/关键字.png" alt="">
+                    <span>关键字:</span>
+                    <span  v-text="ctx.row.key_words"></span>
+                </div>
 
-       </div>
-        <div class="detail">
-            <div class="title">相关资料</div>
-            <div class="image-detail">
-                <img @click="on_click_image(item)" class="item" v-for="item in ctx.row.papers" :src="item" alt="">
             </div>
+            <div class="detail">
+                <div class="title">相关资料</div>
+                <div class="image-detail">
+                    <img @click="on_click_image(item)" class="item" v-for="item in ctx.row.papers" :src="item" alt="">
+                </div>
+            </div>
+
+            <div class="detail">
+                <div class="title">详细描述</div>
+                <div v-text="row.detail"></div>
+            </div>
+            <div class="update_time">
+                <span class="mylabel">更新于:</span>
+                <span v-text="mytime( row.update_time )"></span>
+            </div>
+
         </div>
 
-        <div class="detail">
-            <div class="title">详细描述</div>
-            <div v-text="row.detail"></div>
-        </div>
-        <div class="update_time">
-            <span class="mylabel">更新于:</span>
-            <span v-text="mytime( row.update_time )"></span>
-        </div>
     </div>
 </template>
 
@@ -127,8 +93,6 @@
 <style scoped lang="scss">
 .com-jobinfo-detail{
     background-color: #ffffff;
-    min-height: calc( var(--app-height) - 80px );
-    overflow: auto;
 }
 .title-panel{
     background-color: white;
