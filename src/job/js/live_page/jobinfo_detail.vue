@@ -128,7 +128,7 @@
 .com-jobinfo-detail{
     background-color: #ffffff;
     min-height: calc( var(--app-height) - 80px );
-
+    overflow: auto;
 }
 .title-panel{
     background-color: white;
