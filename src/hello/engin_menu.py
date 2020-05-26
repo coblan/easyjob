@@ -25,22 +25,22 @@ class PcMenu(BaseEngine):
         menu = [
             #{'label': 'HOME', 'url': page('home'), 'icon': fa('fa-home'), 'visible': True},
          
-            {'label': '公司', 'icon': fa('fa-truck'), 'visible': True,
+            {'label': '公司', 'icon': fa('fa-building-o'), 'visible': True,
              'submenu': [
                 {'label':'公司信息','url':page('cominfo')},
                 #{'label':'商品', 'url': page('goods'), },
                 {'label':'招工信息', 'url': page('jobinfo'), },
              ]},
-            {'label':'求职者','icon':fa('fa-truck'),
+            {'label':'求职者','icon':fa('fa-address-book-o'),
              'submenu':[
                  {'label':'人员信息','url':page('workinfo')},
                  {'label':'求职信息','url':page('seekjob')}
              ]
              },
             
-             {'label':'协议管理','icon':fa('fa-truck'),'url':page('configpage')},
+             {'label':'协议管理','icon':fa('fa-book'),'url':page('configpage')},
              
-            {'label':'帮助管理','icon':fa('fa-truck'),'url':page('myhelp')},
+            {'label':'帮助管理','icon':fa('fa-question-circle'),'url':page('myhelp')},
 
             {'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
              'submenu': [

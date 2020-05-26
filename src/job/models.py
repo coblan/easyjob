@@ -18,6 +18,11 @@ class CompanyInfo(models.Model):
     address = models.CharField('公司地址',max_length=400,blank=True)
     license = PictureField('营业执照',blank=True,max_length=300)
     account_certificate = PictureField('开户许可证书',blank=True,max_length=300)
+    
+    opening_bank = models.CharField('开户行',blank=True,max_length = 400)
+    bank_code = models.CharField('银行账号',blank=True,max_length=300)
+    website = models.CharField('网站',blank=True, max_length=400)
+    
     qualification_certificate = PictureField('资质证书',blank=True,max_length=300)
     update_time = models.DateTimeField(verbose_name='更新时间',auto_now=True)
     status = models.IntegerField(verbose_name='当前状态',choices=COM_INFO_STATUS,default=0)
@@ -70,6 +75,9 @@ class WorkInfo(models.Model):
     head = PictureField('头像',blank=True,max_length = 300,help_text='2寸标准证件照')
     id_face1 = PictureField('身份证正面',blank=True,max_length=300)
     id_face2 = PictureField('身份证反面',blank=True,max_length=300)
+    bank_cover = PictureField('银行卡正面', blank=True ,max_length =300)
+    bank_code = models.CharField('卡号',blank=True,max_length=300)
+    opening_bank = models.CharField('开户行',blank=True,max_length = 400)
     
     education = PictureField('学历证明',blank=True,max_length=300)
     vocational_certificate = PictureField('职业证书',blank=True,max_length=300)

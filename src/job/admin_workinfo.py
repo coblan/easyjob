@@ -13,6 +13,17 @@ class WorkinfoPage(TablePage):
         model = WorkInfo
         exclude = []
         pop_edit_fields=['id']
+        
+        def dict_head(self, head):
+            width = {
+                'address':120,
+            }
+            if head['name'] in width:
+                head['width'] = width[head['name']]
+            if head.get('editor') == 'com-table-picture':
+                head['width'] = 200
+                
+            return head
 
 class WorkinfoForm(ModelFields):
     class Meta:
@@ -65,7 +76,12 @@ class WorkinfoIdFace(WorkinfoFormBase):
     class Meta:
         model = WorkInfo
         fields=['id_face1','id_face2']
-
+        
+class WorkerBankInfo(WorkinfoFormBase):
+    class Meta:
+        model = WorkInfo
+        fields=['bank_cover','bank_code','opening_bank']
+        
 class Workinfo_education(WorkinfoFormBase):
     class Meta:
         model = WorkInfo
@@ -107,6 +123,7 @@ director.update({
     'workinfo.base':WorkinfoBase,
     'workinfo.idface':WorkinfoIdFace,
     'workinfo.education':Workinfo_education,
+    'workinfo.bankcard':WorkerBankInfo,
     #'workinfo.agreement':WorkinfoAgreement,
 })
 

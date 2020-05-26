@@ -1,7 +1,7 @@
 from hello.engin_menu import mb_page
 from django.conf import settings
 from helpers.director.shortcut import get_request_cache
-from job.admin_companyinfo import CompanyInfoBasic,CompanyInfoLicense,CompanyInfoaccount_certificate,CompanyInfo_qualification_certificate
+from job.admin_companyinfo import CompanyInfoBasic,CompanyInfoLicense,CompanyInfoaccount_certificate,CompanyInfo_qualification_certificate,CompanyInfoOther
 from helpers.director.kv import get_value
 
 class Comcert(object):
@@ -30,15 +30,21 @@ class Comcert(object):
                                   'fields_ctx':{
                                       'title':'营业执照',
                                       **CompanyInfoLicense().get_context()}},
-                                 {'label':'开户许可证','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+                                 {'label':'银行信息','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
                                   'fields_ctx':{
-                                      'title':'开户许可证',
+                                      'title':'银行信息',
                                       **CompanyInfoaccount_certificate().get_context()
                                       }},
+                                 
                                  {'label':'资质证书','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
                                   'fields_ctx':{
                                       'title':'资质证书',
                                       **CompanyInfo_qualification_certificate().get_context()
+                                      }},
+                                 {'label':'其他','action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+                                  'fields_ctx':{
+                                      'title':'其他信息',
+                                      **CompanyInfoOther().get_context()
                                       }},
                                  
                               ]

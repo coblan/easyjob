@@ -1,5 +1,5 @@
 from hello.engin_menu import mb_page
-from ..admin_workinfo import WorkinfoBase,WorkinfoIdFace,Workinfo_education #,WorkinfoAgreement
+from ..admin_workinfo import WorkinfoBase,WorkinfoIdFace,Workinfo_education,WorkerBankInfo #,WorkinfoAgreement
 from helpers.director.kv import get_value
 
 class WorkerCert(object):
@@ -36,6 +36,14 @@ class WorkerCert(object):
                                              **WorkinfoIdFace().get_context()
                                              }
                                         
+                                    },
+                                    {
+                                        'label':'银行卡信息',
+                                         'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+                                         'fields_ctx':{
+                                             'title':'银行卡信息',
+                                             **WorkerBankInfo().get_context()
+                                             }
                                     },
                                     {
                                         'label':'学历证明',

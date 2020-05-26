@@ -15,6 +15,16 @@ class CompanyInfoPage(TablePage):
         exclude =[]
         pop_edit_fields=['id']
         
+        def dict_head(self, head):
+            width = {
+                'license':200,
+                'account_certificate':200,
+                'qualification_certificate':200,
+            }
+            if head['name'] in width:
+                head['width'] = width.get(head['name'])
+            return head
+        
         class filters(RowFilter):
             names = ['status']
         
@@ -79,7 +89,7 @@ class CompanyInfoLicense(CompanyInfoBasic):
 class CompanyInfoaccount_certificate(CompanyInfoBasic):
     class Meta:
         model = CompanyInfo
-        fields =['account_certificate']
+        fields =['account_certificate','opening_bank','bank_code']
     
     def dict_head(self, head):
         if head['name'] =='account_certificate':
@@ -99,6 +109,18 @@ class CompanyInfo_qualification_certificate(CompanyInfoBasic):
         if self.instance.status != 0:
             head['readonly'] = True
         return head
+  
+class CompanyInfoOther(CompanyInfoBasic):
+    class Meta:
+        model = CompanyInfo
+        fields =['website']
+    
+    def dict_head(self, head):
+        if head['name'] =='account_certificate':
+            head['maxspan'] = 1000
+        if self.instance.status != 0:
+            head['readonly'] = True
+        return head  
   
 @director_view('CompanyInfo/progress')
 def get_companyInfo_cert_progress():
@@ -132,7 +154,8 @@ director.update({
     'cominfo-basic':CompanyInfoBasic,
     'cominfo-license':CompanyInfoLicense,
     'cominfo-account_certificate':CompanyInfoaccount_certificate,
-    'cominfo-qualification_certificate':CompanyInfo_qualification_certificate
+    'cominfo-qualification_certificate':CompanyInfo_qualification_certificate,
+    'cominfo.other':CompanyInfoOther,
 })
 
 page_dc.update({
