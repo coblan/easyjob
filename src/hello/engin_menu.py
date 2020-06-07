@@ -19,6 +19,7 @@ class PcMenu(BaseEngine):
     menu_search=False
     need_staff=True
     access_from_internet=True
+    logout_url = '/accounts/logout?next=/pc'
     @property
     def menu(self):
         crt_user = self.request.user
