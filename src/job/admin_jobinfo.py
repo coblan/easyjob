@@ -1,4 +1,4 @@
-from helpers.director.shortcut import page_dc,ModelFields,ModelTable,director,TablePage,RowFilter,director_view,get_request_cache
+from helpers.director.shortcut import page_dc,ModelFields,ModelTable,director,TablePage,RowFilter,director_view,get_request_cache,SelectSearch
 from .models import JobInfo,ApplyRecord
 from helpers.mobile.shortcut import ModelFieldsMobile,ModelTableMobile
 from django.db.models import F
@@ -13,6 +13,24 @@ class JobInfoPage(TablePage):
         model = JobInfo
         exclude =[]
         pop_edit_fields=['id']
+        
+        def get_operation(self):
+            return []
+        
+        class filters(RowFilter):
+            names = ['status','audit_status']
+            range_fields = ['update_time']
+            
+        class search(SelectSearch):
+            names = ['com__name','position','address']
+            
+            def get_option(self, name):
+                dc = {
+                    'com__name':{'value':'com__name','label':'公司'},
+                    'position':{'value':'position','label':'职位'},
+                    'address':{'value':'address','label':'地址'}
+                }
+                return dc.get(name)
 
 class JobinfoForm(ModelFields):
     class Meta:

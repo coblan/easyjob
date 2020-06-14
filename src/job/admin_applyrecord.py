@@ -41,6 +41,9 @@ class ApplyRecordPage(TablePage):
             return {
                 'company':str(inst.job.com)
             }
+        
+        def get_operation(self):
+            return []
             
         class filters(RowFilter):
             names = ['status']

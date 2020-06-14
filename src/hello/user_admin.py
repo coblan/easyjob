@@ -12,8 +12,8 @@ class EasyJobUser(UserPage):
         
         def getExtraHead(self):
             return [
-                {'name':'company','label':'公司用户','editor':'com-table-span','width':150},
-                {'name':'worker','label':'个人用户','editor':'com-table-span','width':100},
+                {'name':'company','label':'公司名','editor':'com-table-span','width':150},
+                {'name':'worker','label':'个人名','editor':'com-table-span','width':100},
             ]
         
        
@@ -24,12 +24,12 @@ class EasyJobUser(UserPage):
             }
         
         def inn_filter(self, query):
-            if self.search_args.get('usertype') =='admin':
-                query = query.filter(companyinfo__isnull=True,workinfo__isnull=True)
+            if self.search_args.get('usertype') =='other':
+                query = query.exclude(companyinfo__status=2,workinfo__status=2)
             elif self.search_args.get('usertype') =='company':
-                query = query.exclude(companyinfo__isnull=True)
+                query = query.filter(companyinfo__status=2)
             elif self.search_args.get('usertype') =='worker':
-                query = query.exclude(workinfo__isnull=True)
+                query = query.filter(workinfo__status=2)
             return query
         
         #def inn_filter(self, query):
@@ -65,17 +65,19 @@ class EasyJobUser(UserPage):
             #return heads
         
         class filters(RowFilter):
-            names=['first_name','groups__name','is_superuser','is_staff','is_active']
-            icontains=['first_name','groups__name']
+            # 'groups__name',
+            names=['first_name','is_superuser','is_staff','is_active']
+            #icontains=['first_name','groups__name']
+            icontains=['first_name']
             
             def getExtraHead(self):
                 return [
                     {'name':'usertype','label':'用户类型','editor':'com-filter-select','options':[
-                        {'value':'company','label':'公司账号'},
-                        {'value':'worker','label':'个人账号'},
-                        {'value':'admin','label':'其他账号'},
+                        {'value':'company','label':'公司认证账号'},
+                        {'value':'worker','label':'个人认证账号'},
+                        {'value':'other','label':'其他账号'},
                         ]},
-                    {'name':'groups__name','label':'权限分组','show':'!scope.ps.search_args.groups_id'},
+                    #{'name':'groups__name','label':'权限分组','show':'!scope.ps.search_args.groups_id'},
                 ]
             
 

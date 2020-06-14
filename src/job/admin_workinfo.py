@@ -1,4 +1,4 @@
-from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,director,get_request_cache,director_view
+from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,director,get_request_cache,director_view,RowFilter
 from job . models import WorkInfo
 from helpers.mobile.shortcut import ModelFieldsMobile
 from helpers.director.model_func.dictfy import sim_dict
@@ -12,7 +12,7 @@ class WorkinfoPage(TablePage):
     
     class tableCls(ModelTable):
         model = WorkInfo
-        exclude = []
+        exclude = ['user']
         pop_edit_fields=['id']
         
         def dict_head(self, head):
@@ -25,11 +25,20 @@ class WorkinfoPage(TablePage):
                 head['width'] = 200
                 
             return head
+        
+        class filters(RowFilter):
+            names = ['name','status']
+            icontains =['name']
+            range_fields =['update_time']
+        
+        def get_operation(self):
+            return []
+        
 
 class WorkinfoForm(ModelFields):
     class Meta:
         model = WorkInfo
-        exclude =[]
+        exclude =['user']
 
 
 class WorkinfoFormBase(ModelFieldsMobile):

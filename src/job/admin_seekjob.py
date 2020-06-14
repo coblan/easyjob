@@ -1,4 +1,4 @@
-from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,director,RowFilter
+from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,director,RowFilter,SelectSearch
 from .models import SeekJobInfo
 from helpers.mobile.shortcut import ModelFieldsMobile,ModelTableMobile
 
@@ -13,6 +13,23 @@ class SeekJobPage(TablePage):
         model = SeekJobInfo
         exclude =[]
         pop_edit_fields=['id']
+        
+        def get_operation(self):
+            return []
+        
+        class filters(RowFilter):
+            names = ['status','audit_status']
+            range_fields=['update_time']
+        
+        class search(SelectSearch):
+            names = ['key_words','worker__name']
+            
+            def get_option(self, name):
+                if name =='key_words':
+                    return {'value':'key_words','label':'关键字'}
+                if name == 'worker__name':
+                    return {'value':'worker__name','label':'求职者'}
+            
 
 class SeekJobForm(ModelFields):
     class Meta:
