@@ -28,6 +28,9 @@
 
             <van-icon class="next-arrow" name="arrow" />
         </div>
+        <div v-if="rows.length==0" class="ab-center" >
+            <span>暂时没有申请记录</span>
+        </div>
     </div>
 </template>
 <script>
@@ -63,6 +66,10 @@
     }
 </script>
 <style scoped lang="scss">
+.com-apply-list-company{
+    height: calc(100vh - 50px);
+    width: 100vw;
+}
 .block{
     padding:  .5rem .3rem;
     background-color: white;

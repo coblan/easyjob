@@ -17,6 +17,11 @@
             </van-tag>
             <span class="apply-time" v-text="mytime( row.createtime )"></span>
         </div>
+
+        <div v-if="rows.length==0" class="ab-center" >
+            <span>暂时没有申请记录</span>
+        </div>
+
     </div>
 </template>
 <script>
@@ -43,6 +48,10 @@
     }
 </script>
 <style scoped lang="scss">
+    .com-apply-detail{
+        width: 100vw;
+        height: calc(100vh - 50px );
+    }
     .item{
         position: relative;
         padding: .3rem;
