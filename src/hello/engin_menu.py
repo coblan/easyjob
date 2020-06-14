@@ -39,6 +39,8 @@ class PcMenu(BaseEngine):
              ]
              },
             
+            {'label':'工作记录','icon':fa('fa-book'),'url':page('applyrecord')},
+            
              {'label':'协议管理','icon':fa('fa-book'),'url':page('configpage')},
              
             {'label':'帮助管理','icon':fa('fa-question-circle'),'url':page('myhelp')},
@@ -46,6 +48,7 @@ class PcMenu(BaseEngine):
             {'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
              'submenu': [
                  #{'label': '微信用户', 'url': page('wxuserinfo'), 'visible': can_touch(Group, crt_user)},
+                 {'label':'账号管理2','url':page('easyjob_user'),'visible':can_touch(User, crt_user)},
                  {'label': '账号管理', 'url': page('jb_user'), 'visible': can_touch(User, crt_user)},
                  #{'label': '权限分组', 'url': page('jb_group'), 'visible': can_touch(Group, crt_user)},
                   

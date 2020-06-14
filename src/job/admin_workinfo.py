@@ -1,6 +1,7 @@
 from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,director,get_request_cache,director_view
 from job . models import WorkInfo
 from helpers.mobile.shortcut import ModelFieldsMobile
+from helpers.director.model_func.dictfy import sim_dict
 
 class WorkinfoPage(TablePage):
     def get_label(self):
@@ -92,6 +93,10 @@ class Workinfo_education(WorkinfoFormBase):
         #model = WorkInfo
         #fields = ['service_agreement']
 
+@director_view('get_worker_info')
+def get_worker_info(worker):
+    worker_info = WorkInfo.objects.get(pk = worker)
+    return sim_dict(worker_info)
 
 @director_view('workerinfo/progress')
 def get_workerInfo_cert_progress():

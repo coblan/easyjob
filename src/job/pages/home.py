@@ -1,9 +1,20 @@
 from hello.engin_menu import mb_page
 from django.conf import settings
 from helpers.director.shortcut import get_request_cache
-from job.admin_jobinfo import JobinfoUserForm,JobinfUserList,MyJobinfoList
+from job.admin_jobinfo import JobinfoUserForm,JobinfUserList,MyJobinfoList,CompanySJobApplyList,WorkerSJobApplyList
 from job.admin_seekjob import SeekjobUserList,Seekjob_Company
 from job.admin_help import MyhelpUserList
+from . worker_cert import get_worker_info_heads
+from job.admin_applyrecord import ApplyRecordFormCompany
+from helpers.func.collection.container import evalue_container
+
+def has_valid_company(user):
+    if getattr(user,'companyinfo',None):
+        return user.companyinfo.status ==2
+
+def has_valid_workinfo(user):
+    if getattr(user,'workinfo',None):
+        return user.workinfo.status ==2
 
 class Home(object):
     def __init__(self, request, engin):
@@ -17,7 +28,8 @@ class Home(object):
         #named_ctx.update({
             #'jobinfo.edit':
         #})
-        return {
+        crt_user = self.request.user
+        ctx =  {
              'editor_ctx':{
                  'layout_editors':[
                     {'editor':'com-top-home-brand','username':self.request.user.username},
@@ -50,6 +62,7 @@ class Home(object):
                          {'label':'发布招工',
                           'icon':'/static/images/发布.png',
                           'action':'location = "/mb/com_release"',
+                          'visible': has_valid_company(crt_user),
                            },
                          
                          {'label':'求职信息','icon':'/static/images/求职.png',
@@ -73,7 +86,30 @@ class Home(object):
                                        #live_root.open_live("live_fields",scope.ps.vc.ctx.fields_ctx)''',
                                        **MyJobinfoList().get_head_context()}, 
                            'action':'live_root.open_live("live_list",scope.head.table_ctx)',
+                            'visible': has_valid_company(crt_user),
                            },
+                        {'label':'申请列表',
+                          'icon':'/static/images/发放.png',
+                          'table_ctx':{'title':'申请列表',
+                                       #'block_click':'live_root.open_live("live_company_apply_detail",{jobinfo:scope.row,worker:scope.row.worker})',
+                                       'block_click':'''ex.director_call("applyrecord.company",{pk:scope.row.pk}).then(resp=>{
+                                          scope.head.fields_ctx.par_row = scope.row
+                                          scope.head.fields_ctx.row= resp.row
+                                          scope.head.fields_ctx.title= resp.row._label
+                                          live_root.open_live("live_fields",scope.head.fields_ctx)
+                                       })  '''  ,
+                                       'fields_ctx':{
+                                           **ApplyRecordFormCompany().get_head_context()
+                                           },
+                                       
+                                       'table_editor':'com-apply-list-company',
+                                       **CompanySJobApplyList().get_head_context()}, 
+                           'action':'live_root.open_live("live_list",scope.head.table_ctx)',
+                           'visible': has_valid_company(crt_user),
+                           },
+                         
+                                                                   #debugger
+                                          #scope.head.fields_ctx.par_row = scope.row
                          
                          ]},
                     {'editor':'com-van-grid',
@@ -84,6 +120,7 @@ class Home(object):
                            },
                          {'label':'发布求职','icon':'/static/images/发布招工.png',
                            'action':'location = "/mb/worker_release"',
+                           'visible':has_valid_workinfo(crt_user),
                            },
                          {'label':'招工信息','icon':'/static/images/工厂招工.png',
                           'action':'live_root.open_live("live_list",scope.head.table_ctx)',
@@ -104,6 +141,16 @@ class Home(object):
                                        #live_root.open_live("live_fields",scope.ps.vc.ctx.fields_ctx)''',
                                        **SeekjobUserList().get_head_context()}, 
                            'action':'live_root.open_live("live_list",scope.head.table_ctx)',
+                           'visible':has_valid_workinfo(crt_user),
+                          },
+                        
+                         {'label':'我的申请',
+                         'icon':'/static/images/请求.png',
+                         'table_ctx':{'title':'我的申请',
+                                      'table_editor':'com-apply-detail',
+                                       **WorkerSJobApplyList().get_head_context()}, 
+                           'action':'live_root.open_live("live_list",scope.head.table_ctx)',
+                           'visible':has_valid_workinfo(crt_user),
                           },
    
                          ]},
@@ -162,6 +209,7 @@ class Home(object):
              'editor':'live_layout',
             
         }
+        return evalue_container(ctx)
 
 
 

@@ -111,3 +111,20 @@ class MyHelp(models.Model):
     
     def __str__(self):
         return self.title
+
+APPLY_STATUS= (
+    (0,'待查看'),
+    (1,'接受申请'),
+    (2,'未通过'),
+    (3,'工作完成'),
+)
+
+class ApplyRecord(models.Model):
+    worker = models.ForeignKey(WorkInfo,verbose_name='求职者')
+    job = models.ForeignKey(JobInfo,verbose_name='申请职位')
+    status = models.IntegerField(verbose_name='状态',choices=APPLY_STATUS,default=0)
+    updatetime = models.DateTimeField(verbose_name='更新时间',auto_now=True)
+    createtime = models.DateTimeField(verbose_name='创建时间',auto_now_add=True)
+    
+    def __str__(self):
+        return self.job.position + ' 申请'

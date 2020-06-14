@@ -16,5 +16,6 @@ from . import admin_workinfo
 from . import admin_seekjob
 from . import admin_config
 from . import admin_help
+from . import admin_applyrecord
 
 from . import db_signal

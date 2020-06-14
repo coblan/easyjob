@@ -1,6 +1,59 @@
 from hello.engin_menu import mb_page
 from ..admin_workinfo import WorkinfoBase,WorkinfoIdFace,Workinfo_education,WorkerBankInfo #,WorkinfoAgreement
 from helpers.director.kv import get_value
+from job.admin_workinfo import WorkinfoForm
+
+def get_worker_info_heads():
+    return [
+        {
+            'label':'基本信息',
+            'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+              'fields_ctx':{
+                  'title':'基本信息',
+                  **WorkinfoBase().get_context()
+                  }
+        },
+         {
+             'label':'身份证上传',
+             'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+              'fields_ctx':{
+                  'title':'身份证',
+                  **WorkinfoIdFace().get_context()
+                  }
+             
+         },
+         {
+             'label':'银行卡信息',
+              'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+              'fields_ctx':{
+                  'title':'银行卡信息',
+                  **WorkerBankInfo().get_context()
+                  }
+         },
+         {
+             'label':'学历证明',
+             'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+              'fields_ctx':{
+                  'title':'学历证明',
+                  **Workinfo_education().get_context()
+                  }
+         },
+         #{
+             #'label':'职业证书',
+         #},
+         #{
+             #'label':'技能证书'
+         #},
+         #{
+             #'label':'自由职业者服务协议',
+             #'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
+              #'fields_ctx':{
+                  #'title':'服务协议',
+                  #**WorkinfoAgreement().get_context()
+                  #}
+             
+         #},
+    ]
 
 class WorkerCert(object):
     def __init__(self, request, engin):
@@ -18,58 +71,7 @@ class WorkerCert(object):
                         'groups':[
                             {
                                 'label':'认证信息',
-                                 'cells':[
-                          
-                                    {
-                                       'label':'基本信息',
-                                       'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
-                                         'fields_ctx':{
-                                             'title':'基本信息',
-                                             **WorkinfoBase().get_context()
-                                             }
-                                   },
-                                    {
-                                        'label':'身份证上传',
-                                        'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
-                                         'fields_ctx':{
-                                             'title':'身份证',
-                                             **WorkinfoIdFace().get_context()
-                                             }
-                                        
-                                    },
-                                    {
-                                        'label':'银行卡信息',
-                                         'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
-                                         'fields_ctx':{
-                                             'title':'银行卡信息',
-                                             **WorkerBankInfo().get_context()
-                                             }
-                                    },
-                                    {
-                                        'label':'学历证明',
-                                        'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
-                                         'fields_ctx':{
-                                             'title':'学历证明',
-                                             **Workinfo_education().get_context()
-                                             }
-                                    },
-                                    #{
-                                        #'label':'职业证书',
-                                    #},
-                                    #{
-                                        #'label':'技能证书'
-                                    #},
-                                    #{
-                                        #'label':'自由职业者服务协议',
-                                        #'action':'live_root.open_live("live_fields",scope.head.fields_ctx)',
-                                         #'fields_ctx':{
-                                             #'title':'服务协议',
-                                             #**WorkinfoAgreement().get_context()
-                                             #}
-                                        
-                                    #},
-                            
-                               ]
+                                 'cells':get_worker_info_heads()
                                 
                             },
                             {

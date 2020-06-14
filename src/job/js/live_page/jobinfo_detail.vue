@@ -42,7 +42,12 @@
 
                 </table>
 
+                <div style="text-align: right">
+                    <van-button v-if="apply_status=='need_workinfo'"  disabled type="info" size="small" >认证后申请</van-button>
 
+                    <van-button v-if="apply_status=='can_apply'" type="primary" size="small" @click="apply_work()">立即申请</van-button>
+                    <van-button v-if="apply_status=='applyed'" type="info" disabled  :loading="is_load_apply"  size="small" >已经申请</van-button>
+                </div>
 
                 <div class="key-words">
                     <img src="/static/images/关键字.png" alt="">
@@ -78,8 +83,16 @@
         props:['ctx'],
         data(){
             return {
-                row:this.ctx.row
+                row:this.ctx.row,
+                apply_status:'applyed',
+                is_load_apply:true,
             }
+        },
+        mounted(){
+            ex.director_call('job.apply_status',{pk:this.row.pk}).then((resp)=>{
+                this.apply_status = resp
+                this.is_load_apply=false
+            })
         },
         methods:{
             mytime(time){
@@ -87,6 +100,13 @@
             },
             on_click_image(url){
                 cfg.open_image(url)
+            },
+            apply_work(){
+                cfg.show_load()
+                ex.director_call('job.apply_work',{pk:this.row.pk}).then(()=>{
+                    cfg.hide_load()
+                    cfg.toast('申请成功')
+                })
             }
         }
     }

@@ -1,6 +1,7 @@
-from helpers.director.shortcut import page_dc,ModelFields,ModelTable,director,TablePage,RowFilter
-from .models import JobInfo
+from helpers.director.shortcut import page_dc,ModelFields,ModelTable,director,TablePage,RowFilter,director_view,get_request_cache
+from .models import JobInfo,ApplyRecord
 from helpers.mobile.shortcut import ModelFieldsMobile,ModelTableMobile
+from django.db.models import F
 
 class JobInfoPage(TablePage):
     def get_label(self):
@@ -121,8 +122,50 @@ class MyJobinfoList(ModelTableMobile):
     
     def get_operation(self):
         return []
+
+class CompanySJobApplyList(ModelTableMobile):
+    model = ApplyRecord
+    exclude = []
+    nolimit = True
     
+    def inn_filter(self, query):
+        return query.filter(job__com__user = self.crt_user)
     
+    class filters(RowFilter):
+        names=['status']
+    
+
+class WorkerSJobApplyList(ModelTableMobile):
+    model = ApplyRecord
+    exclude =[]
+    nolimit = True
+    def inn_filter(self, query):
+        return query.filter(worker = self.crt_user.workinfo).annotate(company=F('job__com__name'))
+    
+    def dict_row(self, inst):
+        return {
+            'company':inst.company
+        }
+
+
+@director_view('job.apply_work')
+def apply_work(pk):
+    user=get_request_cache()['request'].user
+    job = JobInfo.objects.get(pk=pk)
+    ApplyRecord.objects.create(worker= user.workinfo,job= job)
+  
+@director_view('job.apply_status')
+def apply_status(pk):
+    user=get_request_cache()['request'].user
+    job = JobInfo.objects.get(pk=pk)
+    if getattr(user,'workinfo') and user.workinfo.status ==2:
+        if ApplyRecord.objects.filter(worker = user.workinfo,job = job).exists():
+            out = 'applyed'
+        else:
+            out = 'can_apply'
+    else:
+        out = 'need_workinfo'
+    return out
 
 director.update({
     'jobinfo':JobInfoPage.tableCls,
@@ -131,6 +174,8 @@ director.update({
     'jobinfolist':JobinfUserList,
     'MyJobinfoList':MyJobinfoList,
     'MyJobinfoList.edit':JobinfoUserForm,
+    'company_job_apply_list':CompanySJobApplyList,
+    'worker_s_job_apply_list':WorkerSJobApplyList,
      #'jobinfoform':JobinfoUserForm,
 })
 page_dc.update({

@@ -28,7 +28,7 @@ class SeekJobUserForm(ModelFieldsMobile):
         exclude =[]
     
     def clean_dict(self, dc):
-        if not dc.get('worker'):
+        if not dc.get('worker') and getattr(self.crt_user,'workinfo',None):
             dc['worker'] = self.crt_user.workinfo.pk
         return dc
     
