@@ -89,7 +89,7 @@ class Home(object):
                             'visible': has_valid_company(crt_user),
                            },
                         {'label':'申请列表',
-                          'icon':'/static/images/发放.png',
+                          'icon':'/static/images/列表.png',
                           'table_ctx':{'title':'申请列表',
                                        #'block_click':'live_root.open_live("live_company_apply_detail",{jobinfo:scope.row,worker:scope.row.worker})',
                                        'block_click':'''ex.director_call("applyrecord.company",{pk:scope.row.pk}).then(resp=>{
@@ -145,7 +145,7 @@ class Home(object):
                           },
                         
                          {'label':'我的申请',
-                         'icon':'/static/images/请求.png',
+                         'icon':'/static/images/列表1.png',
                          'table_ctx':{'title':'我的申请',
                                       'table_editor':'com-apply-detail',
                                        **WorkerSJobApplyList().get_head_context()}, 
