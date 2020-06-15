@@ -148,6 +148,7 @@ class Home(object):
                          'icon':'/static/images/列表1.png',
                          'table_ctx':{'title':'我的申请',
                                       'table_editor':'com-apply-detail',
+                                      'block_click':'cfg.show_load();ex.director_call("d.get_row",{director_name:"MyJobinfoList.edit",pk:scope.row.job}).then((resp)=>{cfg.hide_load(); live_root.open_live("live_jobinfo_detail",{row:resp,title:"职位详情"})  })' ,
                                        **WorkerSJobApplyList().get_head_context()}, 
                            'action':'live_root.open_live("live_list",scope.head.table_ctx)',
                            'visible':has_valid_workinfo(crt_user),

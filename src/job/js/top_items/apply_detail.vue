@@ -1,6 +1,6 @@
 <template>
     <div class="com-apply-detail">
-        <div class="item" v-for="row in rows">
+        <div class="item" v-for="row in rows" @click="on_click(row)">
             <table>
                 <tr>
                     <td>公司:</td>
@@ -16,6 +16,9 @@
                 <span v-text="row._status_label"></span>
             </van-tag>
             <span class="apply-time" v-text="mytime( row.createtime )"></span>
+
+            <van-icon class="next-arrow ab-v-center" style="right: .1rem" name="arrow" />
+
         </div>
 
         <div v-if="rows.length==0" class="ab-center" >
@@ -28,8 +31,12 @@
     export default {
         props:['heads','rows'],
         mounted(){
+            this.parStore = ex.vueParStore(this)
         },
         methods:{
+            on_click(row){
+                ex.eval(this.parStore.vc.ctx.block_click,{row:row})
+            },
             mytime(time){
                 return moment(time).fromNow()
             },
@@ -60,10 +67,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding-right: .6rem;
     }
+
+
 .apply-time{
     position: absolute;
-    right: .3rem;
+    right: .6rem;
     font-size: .26rem;
     color: grey;
     bottom: .3rem;

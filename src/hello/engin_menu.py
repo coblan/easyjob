@@ -26,13 +26,13 @@ class PcMenu(BaseEngine):
         menu = [
             #{'label': 'HOME', 'url': page('home'), 'icon': fa('fa-home'), 'visible': True},
          
-            {'label': '公司', 'icon': fa('fa-building-o'), 'visible': True,
+            {'label': '商家', 'icon': fa('fa-building-o'), 'visible': True,
              'submenu': [
                 {'label':'公司信息','url':page('cominfo')},
                 #{'label':'商品', 'url': page('goods'), },
                 {'label':'招工信息', 'url': page('jobinfo'), },
              ]},
-            {'label':'求职者','icon':fa('fa-address-book-o'),
+            {'label':'个人','icon':fa('fa-address-book-o'),
              'submenu':[
                  {'label':'人员信息','url':page('workinfo')},
                  {'label':'求职信息','url':page('seekjob')}

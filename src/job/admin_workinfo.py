@@ -12,7 +12,7 @@ class WorkinfoPage(TablePage):
     
     class tableCls(ModelTable):
         model = WorkInfo
-        exclude = ['user']
+        exclude = []
         pop_edit_fields=['id']
         
         def dict_head(self, head):

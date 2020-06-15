@@ -12,7 +12,7 @@ class CompanyInfoPage(TablePage):
     
     class tableCls(ModelTable):
         model = CompanyInfo
-        exclude =['user']
+        exclude =[]
         pop_edit_fields=['id']
         
         def get_operation(self):

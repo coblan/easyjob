@@ -2,6 +2,7 @@ from helpers.director.shortcut import page_dc,ModelFields,ModelTable,director,Ta
 from .models import JobInfo,ApplyRecord
 from helpers.mobile.shortcut import ModelFieldsMobile,ModelTableMobile
 from django.db.models import F
+from helpers.director.model_func.dictfy import sim_dict
 
 class JobInfoPage(TablePage):
     def get_label(self):
@@ -43,6 +44,16 @@ class JobinfoUserForm(ModelFieldsMobile):
         model = JobInfo
         exclude =['com']
     
+    def dict_row(self, inst):
+        papers = [inst.plat_contract,inst.contract,inst.bid]
+        
+        return {
+            'com__name':inst.com.name,
+            'com__contact':inst.com.contact,
+            'papers':papers,
+            
+        }
+        
     def clean_save(self):
         self.instance.com = self.crt_user.companyinfo
     

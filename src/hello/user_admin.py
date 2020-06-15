@@ -12,8 +12,8 @@ class EasyJobUser(UserPage):
         
         def getExtraHead(self):
             return [
-                {'name':'company','label':'公司名','editor':'com-table-span','width':150},
-                {'name':'worker','label':'个人名','editor':'com-table-span','width':100},
+                {'name':'company','label':'认证商家名','editor':'com-table-span','width':150},
+                {'name':'worker','label':'认证个人名','editor':'com-table-span','width':100},
             ]
         
        

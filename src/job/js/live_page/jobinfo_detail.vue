@@ -104,6 +104,7 @@
             apply_work(){
                 cfg.show_load()
                 ex.director_call('job.apply_work',{pk:this.row.pk}).then(()=>{
+                    this.apply_status = 'applyed'
                     cfg.hide_load()
                     cfg.toast('申请成功')
                 })
