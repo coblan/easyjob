@@ -130,7 +130,7 @@ class Home(object):
                               **JobinfUserList().get_head_context(),
                               'title':'需求职位',
                                 'table_editor':'com-list-jobinfo-item',
-                                'block_click':'debugger;live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情",protocol:scope.head.protocol})',
+                                'block_click':'live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情",protocol:scope.head.protocol})',
                                 'protocol':get_value('apply_job_protocol','请在后台更新《求职申请协议》'),
                                        } },
                         {'label':'我的求职',
