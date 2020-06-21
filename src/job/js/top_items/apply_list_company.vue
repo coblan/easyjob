@@ -78,6 +78,7 @@
     justify-content: space-between;
     align-items:center;
     padding-right: .7rem;
+    position: relative;
 }
     .creattime{
         position: absolute;
