@@ -62,7 +62,7 @@
                return moment(time).fromNow()
             },
             on_click(row){
-                ex.eval(this.parStore.vc.ctx.block_click,{row:row})
+                ex.eval(this.parStore.vc.ctx.block_click,{row:row,head:this.parStore.vc.ctx})
             }
         }
     }

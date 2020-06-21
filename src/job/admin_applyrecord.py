@@ -2,7 +2,7 @@ from helpers.director.shortcut import TablePage,ModelTable,ModelFields,page_dc,d
 from .models import ApplyRecord,WorkInfo
 from helpers.mobile.shortcut import ModelFieldsMobile
 from helpers.director.model_func.dictfy import sim_dict
-
+from helpers.director.kv import get_value
 
 class ApplyRecordPage(TablePage):
     def get_label(self):
@@ -31,6 +31,9 @@ class ApplyRecordPage(TablePage):
                 head['class_map']={
                     0:'info',
                     1:'success',
+                    2:'warning',
+                    3:'success',
+                    4:'success',
                     
                 }
             if head['name'] =='job':
@@ -112,8 +115,12 @@ class ApplyRecordFormCompany(ModelFieldsMobile):
                  { 
                   'editor':'com-op-submit',
                   'label':'接受申请', 
+                  'protocal':get_value('company_empoly_protocol','请在后台完善《商家用工协议》'),
                   'show':'scope.vc.row.status==0',
-                  'action':'''cfg.show_load();scope.ps.vc.row.status=1; scope.ps.vc.submit().then(()=>{
+                  'action':'''cfg.pop_vue_com("com-pop-protocal",{content:scope.head.protocal}).then(()=>{  
+                        cfg.show_load();scope.ps.vc.row.status=1; 
+                        return scope.ps.vc.submit()
+                     }) .then(()=>{
                       cfg.hide_load();
                       cfg.toast("操作成功");
                       scope.ps.vc.par_row.status=1

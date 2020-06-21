@@ -117,6 +117,7 @@ APPLY_STATUS= (
     (1,'接受申请'),
     (2,'未通过'),
     (3,'工作完成'),
+    (4,'已结算'),
 )
 
 class ApplyRecord(models.Model):

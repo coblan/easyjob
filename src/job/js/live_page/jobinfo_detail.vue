@@ -102,8 +102,11 @@
                 cfg.open_image(url)
             },
             apply_work(){
-                cfg.show_load()
-                ex.director_call('job.apply_work',{pk:this.row.pk}).then(()=>{
+
+                cfg.pop_vue_com("com-pop-protocal",{content:this.ctx.protocol}).then(()=>{
+                    cfg.show_load()
+                    return ex.director_call('job.apply_work',{pk:this.row.pk})
+                }).then(()=>{
                     this.apply_status = 'applyed'
                     cfg.hide_load()
                     cfg.toast('申请成功')

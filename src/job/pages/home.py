@@ -7,6 +7,7 @@ from job.admin_help import MyhelpUserList
 from . worker_cert import get_worker_info_heads
 from job.admin_applyrecord import ApplyRecordFormCompany
 from helpers.func.collection.container import evalue_container
+from helpers.director.kv import get_value
 
 def has_valid_company(user):
     if getattr(user,'companyinfo',None):
@@ -92,7 +93,8 @@ class Home(object):
                           'icon':'/static/images/列表.png',
                           'table_ctx':{'title':'申请列表',
                                        #'block_click':'live_root.open_live("live_company_apply_detail",{jobinfo:scope.row,worker:scope.row.worker})',
-                                       'block_click':'''ex.director_call("applyrecord.company",{pk:scope.row.pk}).then(resp=>{
+                                       'block_click':''' ex.director_call("applyrecord.company",{pk:scope.row.pk})
+                                        .then(resp=>{
                                           scope.head.fields_ctx.par_row = scope.row
                                           scope.head.fields_ctx.row= resp.row
                                           scope.head.fields_ctx.title= resp.row._label
@@ -128,7 +130,8 @@ class Home(object):
                               **JobinfUserList().get_head_context(),
                               'title':'需求职位',
                                 'table_editor':'com-list-jobinfo-item',
-                                'block_click':'live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情"})',
+                                'block_click':'debugger;live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情",protocol:scope.head.protocol})',
+                                'protocol':get_value('apply_job_protocol','请在后台更新《求职申请协议》'),
                                        } },
                         {'label':'我的求职',
                          'icon':'/static/images/请求.png',
