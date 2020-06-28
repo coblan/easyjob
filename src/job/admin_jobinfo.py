@@ -46,13 +46,16 @@ class JobinfoUserForm(ModelFieldsMobile):
     
     def dict_row(self, inst):
         papers = [inst.plat_contract,inst.contract,inst.bid]
-        
-        return {
-            'com__name':inst.com.name,
-            'com__contact':inst.com.contact,
-            'papers':papers,
-            
+        dc = {
+            'papers':papers
         }
+        if inst.com:
+            dc.update( {
+                'com__name':inst.com.name,
+                'com__contact':inst.com.contact,
+            })
+        
+        return dc
         
     def clean_save(self):
         self.instance.com = self.crt_user.companyinfo
