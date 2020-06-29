@@ -26,6 +26,13 @@ class ApplyRecordPage(TablePage):
             return query.select_related('job__com')
         
         def dict_head(self, head):
+            width={
+                'job':150,
+                'status':150,
+            }
+            if head['name'] in width:
+                head['width'] = width.get(head['name'])
+            
             if head['name'] == 'status':
                 head['editor'] = 'com-table-tag-map'
                 head['class_map']={
@@ -34,10 +41,10 @@ class ApplyRecordPage(TablePage):
                     2:'warning',
                     3:'success',
                     4:'success',
+                    101:'warning',
                     
                 }
-            if head['name'] =='job':
-                head['width'] = 150
+
             return head
         
         def dict_row(self, inst):
@@ -46,7 +53,24 @@ class ApplyRecordPage(TablePage):
             }
         
         def get_operation(self):
-            return []
+            return [
+                {'editor':'com-op-btn',
+                 'label':'审批通过',
+                 'action':'scope.ps.selected_set_and_save(scope.head)',
+                 'pre_set':'rt={status:3}',
+                 'row_match':'many_row',
+                 'match_express':'scope.row.status == 1',
+                 'match_msg':'只能选择商家已经接受了的申请',
+                 },
+                {'editor':'com-op-btn',
+                 'label':'审批不通过',
+                 'action':'scope.ps.selected_set_and_save(scope.head)',
+                 'pre_set':'rt={status:101}',
+                 'row_match':'many_row',
+                 'match_express':'scope.row.status == 1',
+                 'match_msg':'只能选择商家已经接受了的申请',
+                 }
+            ]
             
         class filters(RowFilter):
             names = ['status']
@@ -143,11 +167,11 @@ class ApplyRecordFormCompany(ModelFieldsMobile):
                   'editor':'com-op-van-btn',
                   'type':'info',
                   'label':'项目完结', 
-                  'show':'scope.vc.row.status==1',
-                  'action':'''cfg.show_load();scope.ps.vc.row.status=3; scope.ps.vc.submit().then(()=>{
+                  'show':'scope.vc.row.status==3',
+                  'action':'''cfg.show_load();scope.ps.vc.row.status=4; scope.ps.vc.submit().then(()=>{
                       cfg.hide_load();
                       cfg.toast("操作成功");
-                      scope.ps.vc.par_row.status=3
+                      scope.ps.vc.par_row.status=4
                       })'''}
         ]
     

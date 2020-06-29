@@ -71,8 +71,8 @@ class Home(object):
                           'table_ctx':{'title':'求职信息',
                                        'table_editor':'com-top-seekjob-item',
                                        'block_click':'live_root.open_live("live_seekjob_detail",{row:scope.row})',
-                                       **Seekjob_Company().get_head_context()} 
-          
+                                       **Seekjob_Company().get_head_context()} ,
+                          'visible': has_valid_company(crt_user),
                           },
                          {'label':'我的发布',
                           'icon':'/static/images/发放.png',
@@ -132,7 +132,9 @@ class Home(object):
                                 'table_editor':'com-list-jobinfo-item',
                                 'block_click':'live_root.open_live("live_jobinfo_detail",{row:scope.row,title:"职位详情",protocol:scope.head.protocol})',
                                 'protocol':get_value('apply_job_protocol','请在后台更新《求职申请协议》'),
-                                       } },
+                                       },
+                          'visible':has_valid_workinfo(crt_user),
+                          },
                         {'label':'我的求职',
                          'icon':'/static/images/请求.png',
                          'table_ctx':{'title':'我的求职',
