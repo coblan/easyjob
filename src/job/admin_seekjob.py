@@ -36,6 +36,21 @@ class SeekJobForm(ModelFields):
         model = SeekJobInfo
         exclude =[]
     
+    def get_operations(self):
+        ls = [
+            {
+                'editor':'com-btn',
+                'type':'success',
+                'icon':'el-icon-receiving',
+                'label':'审批通过', 
+                'action':'scope.ps.vc.row.audit_status=3;scope.ps.vc.save()',
+                'show':'scope.row.audit_status==2'
+            },
+        ]
+        ops = super().get_operations()
+        ls.extend(ops)
+        return ls
+    
 
 class SeekJobUserForm(ModelFieldsMobile):
     hide_fields=['worker']
@@ -106,11 +121,9 @@ class Seekjob_Company(ModelTableMobile):
     model = SeekJobInfo
     exclude =[]
     nolimit=True
-    #def inn_filter(self, query):
-        #return query.anotate(head = ) 
-    
+
     def inn_filter(self, query):
-        return query.filter(status =1 ).order_by('-update_time')
+        return query.filter(status =1 ,audit_status = 3).order_by('-update_time')
         
     def dict_row(self, inst):
         cert_img = []

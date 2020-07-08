@@ -1,7 +1,7 @@
 from helpers.director.shortcut import page_dc,ModelFields,ModelTable,director,TablePage,RowFilter,director_view,get_request_cache,SelectSearch
-from .models import JobInfo,ApplyRecord
+from .models import JobInfo,ApplyRecord,WorkInfo
 from helpers.mobile.shortcut import ModelFieldsMobile,ModelTableMobile
-from django.db.models import F
+from django.db.models import F,Q
 from helpers.director.model_func.dictfy import sim_dict
 
 class JobInfoPage(TablePage):
@@ -37,6 +37,54 @@ class JobinfoForm(ModelFields):
     class Meta:
         model = JobInfo
         exclude =[]
+        
+    def get_operations(self):
+        ls =[
+             {
+                'editor':'com-btn',
+                'label':'审批通过', 
+                'type':'success',
+                'action':'scope.ps.vc.row.audit_status=3;scope.ps.vc.save()',
+                'show':'scope.row.audit_status==2'
+            }
+        ]
+        btns = super().get_operations()
+        ls.extend(btns)
+        return ls
+    
+    def dict_head(self, head):
+        if head['name']=='appoint':
+            head.update( 
+               {'editor':'com-field-pop-table-select',
+                
+                #'init_express':'''
+                #scope.head.table_ctx.par_row=scope.row; 
+                #scope.head.table_ctx.search_args._q = scope.row.Team1En.replace(/-/g,' ');
+                #scope.head.table_ctx.search_args._qf = "teamname";
+                #Vue.set(scope.head.table_ctx.search_args,"_start_matchdate",scope.row.EventDateTime)
+                #Vue.set(scope.head.table_ctx.search_args,"_end_matchdate",scope.row.EventDateTime)
+                #Vue.set(scope.head.table_ctx.search_args,"sportid",scope.row.SportId)
+                #''',
+             #'after_select':'debugger;ex.vueAssign(scope.selected_row,{appoint:scope.row.pk,_appoint_label:scope.row._label},);',
+             'table_ctx':WorkerTab().get_head_context(),'options':[],
+             })
+        return head
+            
+
+class WorkerTab(ModelTable):
+    model = WorkInfo
+    exclude =[]
+    
+    def inn_filter(self, query):
+        return query.filter(status= 2)
+    
+    def dict_head(self, head):
+        if head['name'] =='id':
+            head['editor'] ='com-table-click'
+            head['action']='scope.ps.vc.$emit("finish",scope.row)'
+        return head
+
+    
         
 class JobinfoUserForm(ModelFieldsMobile):
     nolimit=True
@@ -101,7 +149,7 @@ class JobinfUserList(ModelTableMobile):
     exclude = []
     nolimit=True
     def inn_filter(self, query):
-        return query.filter(status=1).order_by('-update_time')
+        return query.filter(status=1,audit_status=3).filter(Q(appoint__isnull=True) | Q(appoint=self.crt_user.workinfo)).order_by('-update_time')
     
     def dict_row(self, inst):
         papers = [inst.plat_contract,inst.contract,inst.bid]
@@ -208,6 +256,8 @@ director.update({
     'MyJobinfoList.edit':JobinfoUserForm,
     'company_job_apply_list':CompanySJobApplyList,
     'worker_s_job_apply_list':WorkerSJobApplyList,
+    
+    'workerTab':WorkerTab,
      #'jobinfoform':JobinfoUserForm,
 })
 page_dc.update({
