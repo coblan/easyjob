@@ -86,6 +86,11 @@ class WorkerTab(ModelTable):
             head['editor'] ='com-table-click'
             head['action']='scope.ps.vc.$emit("finish",scope.row)'
         return head
+    
+    class filters(RowFilter):
+        names=['name']
+        icontains=['name']
+    
 
     
         
