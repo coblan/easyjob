@@ -37,10 +37,13 @@ class JobinfoForm(ModelFields):
     class Meta:
         model = JobInfo
         exclude =[]
-        
+    field_sort=['com','position','pay','appoint','admin_fee','audit_status','address','require_time','key_words','detail','plat_contract','contract','bid','status',]
+    readonly=['com']
+    
     def get_operations(self):
         ls =[
              {
+                 'name':'audit_ok',
                 'editor':'com-btn',
                 'label':'审批通过', 
                 'type':'success',
@@ -90,7 +93,7 @@ class JobinfoUserForm(ModelFieldsMobile):
     nolimit=True
     class Meta:
         model = JobInfo
-        exclude =['com']
+        exclude =['com','admin_fee','appoint']
     
     def dict_row(self, inst):
         papers = [inst.plat_contract,inst.contract,inst.bid]
@@ -107,6 +110,7 @@ class JobinfoUserForm(ModelFieldsMobile):
         
     def clean_save(self):
         self.instance.com = self.crt_user.companyinfo
+        self.instance.admin_fee = int(  self.instance.pay * 0.2 )
     
     def dict_head(self, head):
         head = super().dict_head(head)
@@ -158,7 +162,7 @@ class JobinfUserList(ModelTableMobile):
             'com__name':inst.com.name,
             'com__contact':inst.com.contact,
             'papers':papers,
-            
+            'pay':inst.pay - inst.admin_fee
         }
     
     class filters(RowFilter):

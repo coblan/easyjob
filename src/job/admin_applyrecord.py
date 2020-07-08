@@ -54,7 +54,7 @@ class ApplyRecordPage(TablePage):
         
         def get_operation(self):
             return [
-                {'editor':'com-op-btn',
+                {'editor':'com-btn',
                  'label':'审批通过',
                  'action':'scope.ps.selected_set_and_save(scope.head)',
                  'pre_set':'rt={status:3}',
@@ -62,7 +62,7 @@ class ApplyRecordPage(TablePage):
                  'match_express':'scope.row.status == 1',
                  'match_msg':'只能选择商家已经接受了的申请',
                  },
-                {'editor':'com-op-btn',
+                {'editor':'com-btn',
                  'label':'审批不通过',
                  'action':'scope.ps.selected_set_and_save(scope.head)',
                  'pre_set':'rt={status:101}',

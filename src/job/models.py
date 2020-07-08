@@ -50,9 +50,10 @@ class JobInfo(models.Model):
     position = models.CharField('职位',max_length=100)
     #com_name = models.CharField('公司名称',max_length=200)
     address = models.CharField('上班地址',max_length=400,blank=True)
-    pay= models.CharField('薪酬待遇',max_length=100,blank=True)
+    #pay= models.CharField('薪酬待遇',max_length=100,blank=True)
+    pay= models.IntegerField(verbose_name='支付费用',default=0)
     require_time = models.CharField('要求时间',max_length=100,blank=True)
-    key_words = models.CharField('关键字',max_length=30,default='',help_text='最多不超过30个字')
+    key_words = models.CharField('关键字',max_length=30,blank=True,help_text='最多不超过30个字')
     #contact = models.CharField('联系方式',max_length=200,)
     update_time = models.DateTimeField('更新时间',auto_now_add=True)
     detail = models.TextField('详细介绍',blank=True)
@@ -63,6 +64,7 @@ class JobInfo(models.Model):
     status = models.IntegerField('在线状态',choices=INFO_STATUS,default=1)
     audit_status = models.IntegerField('审批状态',choices=AUDIT_STATUS,default=1)
     appoint = models.ForeignKey('WorkInfo',verbose_name='指定工人',blank=True,null=True)
+    admin_fee = models.IntegerField(verbose_name='管理费',default=0)
     
     def __str__(self):
         return self.position
