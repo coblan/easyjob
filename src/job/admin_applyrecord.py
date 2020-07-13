@@ -90,6 +90,41 @@ class ApplyRecordFrom(ModelFields):
     class Meta:
         model = ApplyRecord
         exclude = []
+    
+    def dict_head(self, head):
+        if head['name'] =='status':
+            head['editor'] ='com-field-flow'
+            head['chain']={
+                0:{
+                    'last':[],
+                    'next':[1,2]
+                },
+                1:{
+                    'last':[0],
+                    'next':[3,101]
+                },
+                2:{
+                    'last':[0],
+                    'next':[]
+                },
+                3:{
+                    'last':[0,1],
+                    'next':[4,]
+                },
+                4:{
+                    'last':[0,1,3],
+                    'next':[5]
+                },
+                5:{
+                    'last':[0,1,3,4],
+                    'next':[],
+                },
+                101:{
+                    'last':[0,1],
+                    'next':[]
+                }
+            }
+        return head
         
 
 class WorkinfoCompany(ModelFieldsMobile):

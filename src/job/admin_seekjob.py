@@ -51,6 +51,25 @@ class SeekJobForm(ModelFields):
         ls.extend(ops)
         return ls
     
+    def dict_head(self, head):
+        if head['name'] =='audit_status':
+            head['editor'] = 'com-field-flow'
+            head['chain']={
+                1:{
+                    'last':[],
+                    'next':[2]
+                },
+                2:{
+                    'last':[1],
+                    'next':[3]
+                },
+                3:{
+                    'last':[1,2,],
+                    'next':[]
+                }
+            }
+        return head
+    
 
 class SeekJobUserForm(ModelFieldsMobile):
     hide_fields=['worker']
