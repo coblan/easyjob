@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^d/',include('helpers.director.urls'),name='director'),
     url(r'^mb/([\w\.]+)/?$',MBpageEngine.as_view(),name=MBpageEngine.url_name),
     url(r'^dapi/(?P<director_name>[\w\/\.-]+)?/?$',director_view),
-    url(r'^pc/?$',RedirectView.as_view(url='/pc/jobinfo')) ,
+    url(r'^pc/?$',RedirectView.as_view(url='/pc/phome')) ,
     url(r'^$',RedirectView.as_view(url='/mb/index')) ,
 ]
 

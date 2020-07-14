@@ -24,7 +24,7 @@ class PcMenu(BaseEngine):
     def menu(self):
         crt_user = self.request.user
         menu = [
-            #{'label': 'HOME', 'url': page('home'), 'icon': fa('fa-home'), 'visible': True},
+            {'label': '首页', 'url': page('phome'), 'icon': fa('fa-home'), 'visible': True},
          
             {'label': '商家', 'icon': fa('fa-building-o'), 'visible': True,
              'submenu': [

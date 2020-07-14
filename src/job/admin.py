@@ -19,3 +19,4 @@ from . import admin_help
 from . import admin_applyrecord
 
 from . import db_signal
+from . import home
