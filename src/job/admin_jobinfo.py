@@ -100,6 +100,11 @@ class JobinfoForm(ModelFields):
              'table_ctx':WorkerTab().get_head_context(),'options':[],
              })
         return head
+    
+    def dict_row(self, inst):
+        return {
+            '_appoint_label':[str(x) for x in inst.appoint.all()]
+        }
             
 
 class WorkerTab(ModelTable):
