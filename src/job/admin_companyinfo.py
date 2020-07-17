@@ -16,7 +16,17 @@ class CompanyInfoPage(TablePage):
         pop_edit_fields=['id']
         
         def get_operation(self):
-            return []
+            return [
+                 {'editor':'com-btn','label':'设置列','icon': 'el-icon-setting',
+                  'action':'cfg.pop_vue_com("com-panel-table-setting",{table_ps:scope.ps,title:"列调整"})'},
+            ]
+        def get_head_context(self):
+            ctx = super().get_head_context()
+            heads_names = [head['name'] for head in ctx.get('heads')]
+            ctx.update({
+                'advise_heads':heads_names,
+            })
+            return ctx
         
         def dict_head(self, head):
             width = {

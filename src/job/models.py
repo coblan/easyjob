@@ -63,7 +63,7 @@ class JobInfo(models.Model):
     bid = PictureField('中标书',max_length=300,blank=True)
     status = models.IntegerField('在线状态',choices=INFO_STATUS,default=1)
     audit_status = models.IntegerField('审批状态',choices=AUDIT_STATUS,default=1)
-    appoint = models.ForeignKey('WorkInfo',verbose_name='指定工人',blank=True,null=True)
+    appoint =  models.ManyToManyField(to='WorkInfo',blank=True,verbose_name='指定工人') #models.ForeignKey('WorkInfo',verbose_name='指定工人',blank=True,null=True)
     admin_fee = models.IntegerField(verbose_name='管理费',default=0)
     
     def __str__(self):
@@ -130,6 +130,7 @@ class ApplyRecord(models.Model):
     worker = models.ForeignKey(WorkInfo,verbose_name='求职者')
     job = models.ForeignKey(JobInfo,verbose_name='申请职位')
     status = models.IntegerField(verbose_name='状态',choices=APPLY_STATUS,default=0)
+    finish_proof = PictureField('完结拍照',max_length=200,blank=True)
     updatetime = models.DateTimeField(verbose_name='更新时间',auto_now=True)
     createtime = models.DateTimeField(verbose_name='创建时间',auto_now_add=True)
     

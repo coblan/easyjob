@@ -1,7 +1,7 @@
 from helpers.director.shortcut import page_dc,ModelFields,ModelTable,director,TablePage,RowFilter,director_view,get_request_cache,SelectSearch
 from .models import JobInfo,ApplyRecord,WorkInfo
 from helpers.mobile.shortcut import ModelFieldsMobile,ModelTableMobile
-from django.db.models import F,Q
+from django.db.models import F,Q,Count,Subquery,OuterRef,IntegerField
 from helpers.director.model_func.dictfy import sim_dict
 
 class JobInfoPage(TablePage):
@@ -16,7 +16,35 @@ class JobInfoPage(TablePage):
         pop_edit_fields=['id']
         
         def get_operation(self):
-            return []
+            return [
+                 {'editor':'com-btn','label':'设置列','icon': 'el-icon-setting',
+                  'action':'cfg.pop_vue_com("com-panel-table-setting",{table_ps:scope.ps,title:"列调整"})'},
+            ]
+        
+        def inn_filter(self, query):
+            sub = ApplyRecord.objects.filter(job_id=OuterRef('pk'),status__in=[1,3,4,5]).annotate(mycount=Count('id')).values('mycount')
+            return query.annotate(total_apply = Count('applyrecord'),applyed = Subquery(sub[:1] ,output_field= IntegerField() ))
+        
+        def dict_row(self, inst):
+            return {
+                'applyrecord':inst.total_apply,
+                'applyed':inst.applyed or 0,
+                '_appoint_label':[str(x) for x in inst.appoint.all()]
+            }
+        
+        def get_head_context(self):
+            ctx = super().get_head_context()
+            heads_names = [head['name'] for head in ctx.get('heads')]
+            ctx.update({
+                'advise_heads':heads_names,
+            })
+            return ctx
+        
+        def getExtraHead(self):
+            return [
+                {'name':'applyrecord','label':'申请次数'},
+                {'name':'applyed','label':'申请成功'},
+            ]
         
         class filters(RowFilter):
             names = ['status','audit_status']
@@ -58,7 +86,7 @@ class JobinfoForm(ModelFields):
     def dict_head(self, head):
         if head['name']=='appoint':
             head.update( 
-               {'editor':'com-field-pop-table-select',
+               {'editor':'com-field-pop-table-multi-select',
                 
                 #'init_express':'''
                 #scope.head.table_ctx.par_row=scope.row; 

@@ -146,8 +146,12 @@ class ApplyRecordFormCompany(ModelFieldsMobile):
         exclude = []
     
     def dict_head(self, head):
-        head['readonly'] = True
-        head['required'] = False
+       
+        if head['name'] == 'finish_proof':
+            head['show'] = 'scope.row.status == 3'
+        else:
+            head['readonly'] = True
+            head['required'] = False
         return head
     
     def getExtraHeads(self):
@@ -158,7 +162,7 @@ class ApplyRecordFormCompany(ModelFieldsMobile):
         ctx = super().get_head_context()
         ctx.update({
             'fields_group':[
-                {'label':'申请信息','heads':['worker','job','status','createtime'],},
+                {'label':'申请信息','heads':['worker','job','status','createtime','finish_proof'],},
                 {'label':'求职者信息','heads':['head','contact','address','id_face1','id_face2','education','vocational_certificate','skills_certificate']}
             ]
         })

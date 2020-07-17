@@ -11,13 +11,17 @@ class MyHome(object):
     
     def get_context(self):
         rows =[
-                {'label':'求职申请待审核','value':ApplyRecord.objects.filter(status=1).count(),'action':'location="/pc/applyrecord?status=1"'},
-                {'label':'待结算','value':ApplyRecord.objects.filter(status=4).count(),'action':'location="/pc/applyrecord?status=4"'},
-                {'label':'商户认证待审核','value':CompanyInfo.objects.filter(status=1).count(),'action':'location="/pc/cominfo?status=1"'},
-                {'label':'个人认证待审核','value':WorkInfo.objects.filter(status=1).count(),'action':'location="/pc/applyrecord?status=1"'},
-                {'label':'招工信息待审核','value':JobInfo.objects.filter(audit_status=2).count(),'action':'location="/pc/jobinfo?audit_status=2"'},
-                {'label':'求职信息待审核','value':SeekJobInfo.objects.filter(audit_status=2).count(),'action':'location="/pc/seekjob?audit_status=2"'},
-                        
+            {'label':'个人认证待审核','value':WorkInfo.objects.filter(status=1).count(),'action':'location="/pc/applyrecord?status=1"'},
+            {'label':'求职信息待审核','value':SeekJobInfo.objects.filter(audit_status=2).count(),'action':'location="/pc/seekjob?audit_status=2"'},
+            {'label':'商户认证待审核','value':CompanyInfo.objects.filter(status=1).count(),'action':'location="/pc/cominfo?status=1"'},
+            {'label':'招工信息待审核','value':JobInfo.objects.filter(audit_status=2).count(),'action':'location="/pc/jobinfo?audit_status=2"'},
+                  
+            {'label':'求职申请待审核','value':ApplyRecord.objects.filter(status=1).count(),'action':'location="/pc/applyrecord?status=1"'},
+            {'label':'待结算','value':ApplyRecord.objects.filter(status=4).count(),'action':'location="/pc/applyrecord?status=4"'},
+               
+               
+               
+                     
             ]
         for row in rows:
             if row.get('value') ==0:
