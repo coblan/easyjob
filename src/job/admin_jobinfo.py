@@ -109,19 +109,25 @@ class JobinfoForm(ModelFields):
 
 class WorkerTab(ModelTable):
     model = WorkInfo
-    exclude =[]
+    exclude =['head','address','id_face1','id_face2','bank_cover','opening_bank','education','vocational_certificate','skills_certificate',]
     
-    def inn_filter(self, query):
-        return query.filter(status= 2)
+    #def inn_filter(self, query):
+        #return query.filter(status= 2)
     
     def dict_head(self, head):
+        width ={
+            'name':150,
+            'contact':120,
+        }
+        if head['name'] in width:
+            head['width'] = width.get(head['name'])
         if head['name'] =='id':
             head['editor'] ='com-table-click'
             head['action']='scope.ps.vc.$emit("finish",scope.row)'
         return head
     
     class filters(RowFilter):
-        names=['name']
+        names=['name','status']
         icontains=['name']
     
 

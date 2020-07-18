@@ -13,9 +13,9 @@ from helpers.mobile.base_data import mb_page_dc
 
 class PcMenu(BaseEngine):
     url_name = 'Job'
-    title = 'x' #''
-    brand = 'x' #''
-    mini_brand = 'XCL'
+    title = '易职通' #''
+    brand = '管理后台' #''
+    mini_brand = 'AD'
     menu_search=False
     need_staff=True
     access_from_internet=True
